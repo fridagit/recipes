@@ -1,7 +1,7 @@
   <div class="card m-2" style="width: 18rem;">
-    <img class="card-img-top img-responsive" [src]="recipe.image" />
+    <img class="card-img-top img-fluid rounded" [src]="recipe.image" />
       <div class="card-body">
-          <a class="list-group-item-heading" [href]="recipe.url" target="_blank">{{recipe.name}}</a>
+          <a class="list-group-item-heading" [routerLink]="[index]">{{recipe.name}}</a>
 
         
       </div>

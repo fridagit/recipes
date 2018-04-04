@@ -9,11 +9,13 @@ import { SearchComponent } from './search/search.component';
 import { HomeComponent } from './home/home.component';
 import { RecipesListComponent } from './recipes/recipes-list/recipes-list.component';
 import { RecipeItemComponent } from './recipes/recipes-list/recipe-item/recipe-item.component';
+import { RecipeDetailsComponent } from './recipes/recipes-list/recipe-details/recipe-details.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'search', component: SearchComponent },
-  { path: 'recipes', component: RecipesListComponent},
+  { path: 'recipes', component: RecipesListComponent },
+  { path: 'recipes/:id', component: RecipeDetailsComponent},
   { path: '**', component: HomeComponent }
 ];
 
@@ -23,7 +25,8 @@ const appRoutes: Routes = [
     SearchComponent,
     HomeComponent,
     RecipesListComponent,
-    RecipeItemComponent
+    RecipeItemComponent,
+    RecipeDetailsComponent
   ],
   imports: [
     BrowserModule,
