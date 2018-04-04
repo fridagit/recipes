@@ -1,7 +1,12 @@
   <div class="card m-2" style="width: 18rem;">
     <img class="card-img-top img-responsive" [src]="recipe.image" />
-    <div class="card-body">
-      <a class="list-group-item-heading" [href]="recipe.url" target="_blank">{{recipe.name}}</a>
-    </div>
+      <div class="card-body">
+          <a class="list-group-item-heading" [href]="recipe.url" target="_blank">{{recipe.name}}</a>
+
+        
+      </div>
+      <p class="card-footer text-right">
+          <span  *ngFor="let c of recipe.categories"> {{c.name}} | </span>
+      </p>
   </div>
 
