@@ -7,10 +7,13 @@ import { RecipesService } from './services/recipes.service';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
 import { HomeComponent } from './home/home.component';
+import { RecipesListComponent } from './recipes/recipes-list/recipes-list.component';
+import { RecipeItemComponent } from './recipes/recipes-list/recipe-item/recipe-item.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'search', component: SearchComponent },
+  { path: 'recipes', component: RecipesListComponent},
   { path: '**', component: HomeComponent }
 ];
 
@@ -18,7 +21,9 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     SearchComponent,
-    HomeComponent
+    HomeComponent,
+    RecipesListComponent,
+    RecipeItemComponent
   ],
   imports: [
     BrowserModule,
