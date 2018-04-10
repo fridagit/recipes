@@ -1,16 +1,18 @@
-  <div class="d-flex flex-row recipe justify-content-start">
-      <div class="p-2">
-          <img [src]="recipe.image" *ngIf="recipe.hasImage" class="recipeImage img-fluid rounded"/>
-          <div class="justify-content-center">
-              <span class="header">Det här behöver du:</span>
-          </div>
-          <ul>
-              <li *ngFor="let ingredient of recipe.ingredients">
-                  {{ingredient.number}} {{ingredient.name}}
-              </li>
-          </ul>
-      </div>
-      <div>
-          {{recipe.description}}
-      </div>
+<div class="d-flex flex-row recipe justify-content-start">
+  <div class="p-2">
+    <img [src]="recipe.image" *ngIf="recipe.hasImage" class="recipeImage img-fluid rounded"/>
+    <h2>{{recipe.name}}</h2>
+    <a [href]="recipe.url" *ngIf="recipe.url" target="_blank">{{hostname(recipe.url)}}</a>
+    <div class="justify-content-center">
+      <span class="header">Det här behöver du:</span>
+    </div>
+    <ul>
+      <li *ngFor="let ingredient of recipe.ingredients">
+        {{ingredient.number}} {{ingredient.name}}
+      </li>
+    </ul>
   </div>
+  <div>
+    {{recipe.description}}
+  </div>
+</div>

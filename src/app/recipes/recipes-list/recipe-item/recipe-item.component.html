@@ -3,10 +3,10 @@
       <div class="card-body">
           <a class="list-group-item-heading" [routerLink]="[index]">{{recipe.name}}</a>
 
-        
+
       </div>
       <p class="card-footer text-right">
-          <span  *ngFor="let c of recipe.categories"> {{c.name}} | </span>
+          <span  *ngFor="let c of recipe.categories"> {{c}} | </span>
       </p>
   </div>
 
