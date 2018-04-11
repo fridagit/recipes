@@ -23,6 +23,10 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     return l.hostname;
   }
 
+  hasImage(recipe: Recipe) {
+    return recipe.image != null;
+  }
+
   ngOnInit() {
     this.route.params
       .subscribe(
