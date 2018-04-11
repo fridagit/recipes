@@ -13,6 +13,9 @@ export class RecipeItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if (!this.recipe.image) {
+      this.recipe.image = '../../../../assets/images/table2.jpg';
+    }
   }
 
 }
