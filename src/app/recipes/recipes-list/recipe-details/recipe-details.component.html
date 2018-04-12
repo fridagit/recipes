@@ -19,7 +19,7 @@
       </div>
       <div *ngIf="editDescription" class="container h-100">
         <div class="row h-75">
-          <textarea class="col-12 form-control" title="edit-description">{{recipe.description}}</textarea>
+          <textarea class="col-12" title="edit-description" [(ngModel)]="recipe.description"></textarea>
         </div>
         <div class="row justify-content-around p-2">
           <button class="col-5 btn btn-danger" type="button" (click)="toggleEditDescription()">Ångra</button>

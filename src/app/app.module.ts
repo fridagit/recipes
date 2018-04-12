@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { RecipesListComponent } from './recipes/recipes-list/recipes-list.component';
 import { RecipeItemComponent } from './recipes/recipes-list/recipe-item/recipe-item.component';
 import { RecipeDetailsComponent } from './recipes/recipes-list/recipe-details/recipe-details.component';
+import {FormsModule} from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
     RecipeDetailsComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, { useHash: true }),

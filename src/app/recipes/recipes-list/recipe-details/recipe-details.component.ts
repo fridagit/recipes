@@ -2,6 +2,7 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Recipe} from '../../../models';
 import {RecipesService} from '../../../services/recipes.service';
+import {DataStorageService} from '../../../services/data-storage.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -13,7 +14,7 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
   id: number;
   editDescription: boolean;
 
-  constructor(private route: ActivatedRoute, private recipeService: RecipesService) {
+  constructor(private route: ActivatedRoute, private recipeService: RecipesService, private dataStorageService: DataStorageService) {
     document.body.style.backgroundImage = 'url(\'../../../assets/images/table.jpg\')';
 
   }
@@ -47,6 +48,8 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
   }
 
   saveDescription() {
-
+    // this.dataStorageService.storeRecipe(this.recipe);
+    console.log(this.recipe.description);
+    console.log('TODO: Actual storage to be implemented');
   }
 }
