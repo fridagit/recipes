@@ -1,3 +1,4 @@
+import {HttpModule} from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
@@ -11,6 +12,7 @@ import { RecipesListComponent } from './recipes/recipes-list/recipes-list.compon
 import { RecipeItemComponent } from './recipes/recipes-list/recipe-item/recipe-item.component';
 import { RecipeDetailsComponent } from './recipes/recipes-list/recipe-details/recipe-details.component';
 import {FormsModule} from '@angular/forms';
+import { DataStorageService } from './services/data-storage.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -31,11 +33,12 @@ const appRoutes: Routes = [
   ],
   imports: [
     FormsModule,
+    HttpModule,
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes, { useHash: true }),
   ],
-  providers: [RecipesService],
+  providers: [RecipesService, DataStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
