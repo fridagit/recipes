@@ -1,18 +1,31 @@
-<div class="d-flex flex-row recipe justify-content-start">
-  <div class="p-2">
-    <img [src]="recipe.image" *ngIf="hasImage(recipe)" class="recipeImage img-fluid rounded"/>
-    <h2>{{recipe.name}}</h2>
-    <a [href]="recipe.url" *ngIf="recipe.url" target="_blank">{{hostname(recipe.url)}}</a>
-    <div class="justify-content-center">
-      <span class="header">Det här behöver du:</span>
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <img [src]="recipe.image" *ngIf="hasImage(recipe)" class="recipeImage img-fluid rounded"/>
+      <h2>{{recipe.name}}</h2>
+      <a [href]="recipe.url" *ngIf="recipe.url" target="_blank">{{hostname(recipe.url)}}</a>
+      <div class="justify-content-center">
+        <span class="header">Det här behöver du:</span>
+      </div>
+      <ul>
+        <li *ngFor="let ingredient of recipe.ingredients">
+          {{ingredient.number}} {{ingredient.name}}
+        </li>
+      </ul>
     </div>
-    <ul>
-      <li *ngFor="let ingredient of recipe.ingredients">
-        {{ingredient.number}} {{ingredient.name}}
-      </li>
-    </ul>
-  </div>
-  <div>
-    {{recipe.description}}
+    <div class="col-8">
+      <div (click)="toggleEditDescription()" *ngIf="!editDescription">
+        {{recipe.description}}
+      </div>
+      <div *ngIf="editDescription" class="container h-100">
+        <div class="row h-75">
+          <textarea class="col-12 form-control" title="edit-description">{{recipe.description}}</textarea>
+        </div>
+        <div class="row justify-content-around p-2">
+          <button class="col-5 btn btn-danger" type="button" (click)="toggleEditDescription()">Ångra</button>
+          <button class="col-5 btn btn-success" (click)="saveDescription()">Spara</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -11,6 +11,7 @@ import {RecipesService} from '../../../services/recipes.service';
 export class RecipeDetailsComponent implements OnInit, OnDestroy {
   recipe: Recipe;
   id: number;
+  editDescription: boolean;
 
   constructor(private route: ActivatedRoute, private recipeService: RecipesService) {
     document.body.style.backgroundImage = 'url(\'../../../assets/images/table.jpg\')';
@@ -27,6 +28,10 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     return recipe.image != null;
   }
 
+  toggleEditDescription() {
+    this.editDescription = !this.editDescription;
+  }
+
   ngOnInit() {
     this.route.params
       .subscribe(
@@ -41,4 +46,7 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     document.body.style.backgroundImage = 'url(\'../../../assets/images/home.jpg\')';
   }
 
+  saveDescription() {
+
+  }
 }
