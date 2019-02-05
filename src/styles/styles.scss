@@ -17,7 +17,7 @@ body, html {
 body {
   /* Center and scale the image nicely */
   background-size: cover;
-  background: url("../assets/images/home.jpg") no-repeat fixed center;
+  background-image: url("../assets/images/home.jpg");
 
   padding-top: 70px;
   color: #fff;

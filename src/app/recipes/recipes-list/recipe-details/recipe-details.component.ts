@@ -15,7 +15,7 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
   editDescription: boolean;
 
   constructor(private route: ActivatedRoute, private recipeService: RecipesService, private dataStorageService: DataStorageService) {
-    document.body.style.backgroundImage = 'url(\'../../../assets/images/table.jpg\')';
+    document.body.style.backgroundImage = 'url(\'../../../assets/images/food.jpg\')';
 
   }
 
