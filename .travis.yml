@@ -16,9 +16,9 @@ script:
 before_deploy:
 - cd dist
 deploy:
-#  on:
+  on:
+    all_branches: true
 #    branch: master
-  all_branches: true # TEMP
   provider: firebase
   project: recipes-2018
   token:
