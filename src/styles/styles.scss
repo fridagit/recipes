@@ -18,11 +18,18 @@ body {
   /* Center and scale the image nicely */
   background-size: cover;
   background-image: url("../assets/images/home.jpg");
-
+  font-weight: bold;
   padding-top: 70px;
-  color: #fff;
 }
 
 a, a:visited, a:hover, a:active {
-  color: #fff;
+  color: black;
+}
+
+.opaque {
+  background-color: $card-background;
+}
+
+.card {
+  background-color: $card-background !important;
 }
