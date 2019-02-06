@@ -13,12 +13,11 @@ before_script:
 script:
 - ng build --prod --output-hashing=all
 
-before_deploy:
-- ls -la
 deploy:
+  provider: firebase
   on:
     all_branches: true
 #    branch: master
-  provider: firebase
+  skip_cleanup: true
   token:
     secure: qNsm34nEV3zquE7o6iGsOf8tK0+Qd0O7dgkMf46LMxIYIpOFoHQBvze/dynNR0XGpHFp1ZB1scspgemGVHvci9Jamu64MLfoR30ilf/P0G/CRNWO0uIbMl/W/8MDa8i9Iw9CIlEIAaANDYKgj/zzmigT03Flb3vm8wDE1mQpbuI84FOJ7Piu6L4cf7paMNAEt8X4oeL48F4MFc1qPveOs5oleiMVaN1qp52KKtqd7rrNn7lJeg7tfTW32HdqQ/9rD7G+mKcYLipjU4yVwh36aaLUId3KsgkrEPygs/0PTgH5pDiM2gvfrrjcB6NbrUwu7hNGDlpbwOvzCfLVlz8vLwq2lSMsk1Mtp4quMo8Y1YV9qvDVq0qq3Khl7i+Ognbntwl8YzSFxvz5lUnYUZ4OyMS8/ewYVvLUjfvFwrDy/T/cswqpXc3vo5wvukSr7wANWRg4kY3r8QyHlwE14jaNeQfxgsETjXEkB5FtGs7T93I81N7RIsGqRyCTOsGsV28Q4MX2EYJgWUzlpklyB8MNMGXYdVwEEO+rsFh6Vzmg91G1Ss+zQZvJALlmwLnhioPn9fAfPv1czjWBjCP0BmrdtoYabnIdxTsMFJ3yaJSkTK2GWPQ/SKnB4MXlC2qCwEZwsqI1Zuq8UnwZJ767/UsOA3RuhQzUPqKbT80qvoptbQI=
