@@ -51,5 +51,6 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     // this.dataStorageService.storeRecipe(this.recipe);
     console.log(this.recipe.description);
     console.log('TODO: Actual storage to be implemented');
+    this.toggleEditDescription();
   }
 }

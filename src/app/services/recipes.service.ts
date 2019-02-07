@@ -8,7 +8,7 @@ export class RecipesService {
       name: 'Flygande Jacob',
       image: 'https://img.koket.se/media/flygande-jacob.jpg',
       url: 'https://www.koket.se/flygande-jacob-med-notter',
-      description: 'Sätt ugnen på 225 grader. Ta loss det grillade kycklingköttet från benen. ' +
+      description: '# Sätt ugnen på 225 grader. \nTa loss det grillade kycklingköttet från benen. ' +
       'Skär köttet i mindre bitar. Lägg bitarna i smord ugnssäker form. Krydda med salladskryddan. ' +
       'Skala och skiva bananerna. Lägg bananskivorna ovanpå kycklingen.',
       categories: ['Kyckling', 'Nötter'],
