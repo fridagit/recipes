@@ -1,12 +1,12 @@
-  <div class="card m-2" style="width: 18rem;">
-    <img class="card-img-top img-fluid rounded" [src]="recipe.image" />
-      <div class="card-body">
-          <a class="list-group-item-heading" [routerLink]="[index]" title="{{recipe.name}}">{{recipe.name}}</a>
+<div class="card m-2" style="width: 18rem;">
+  <div class="image rounded" [ngStyle]="{'backgroundImage':  'url(' + recipe.image + ')'}"></div>
+  <div class="card-body">
+    <a class="list-group-item-heading" [routerLink]="[index]" title="{{recipe.name}}">{{recipe.name}}</a>
 
 
-      </div>
-      <p class="card-footer text-right">
-          <span  *ngFor="let c of recipe.categories"> {{c}} | </span>
-      </p>
   </div>
+  <p class="card-footer text-right">
+    <span  *ngFor="let c of recipe.categories"> {{c}} | </span>
+  </p>
+</div>
 
