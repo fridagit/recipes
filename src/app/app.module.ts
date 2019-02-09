@@ -1,8 +1,11 @@
+import { environment } from './../environments/environment';
 import {HttpModule} from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 
 import { RecipesService } from './services/recipes.service';
 import { AppComponent } from './app.component';
@@ -13,6 +16,7 @@ import { RecipeItemComponent } from './recipes/recipes-list/recipe-item/recipe-i
 import { RecipeDetailsComponent } from './recipes/recipes-list/recipe-details/recipe-details.component';
 import {FormsModule} from '@angular/forms';
 import { DataStorageService } from './services/data-storage.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -36,9 +40,11 @@ const appRoutes: Routes = [
     HttpModule,
     BrowserModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
     RouterModule.forRoot(appRoutes, { useHash: true }),
   ],
-  providers: [RecipesService, DataStorageService],
+  providers: [RecipesService, DataStorageService, AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
