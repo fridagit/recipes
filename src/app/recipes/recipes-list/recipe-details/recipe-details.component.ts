@@ -10,7 +10,6 @@ import {RecipesService} from '../../../services/recipes.service';
 })
 export class RecipeDetailsComponent implements OnInit, OnDestroy {
   recipe: Recipe;
-  id: number;
   edit: boolean;
   newIngredient: Ingredient = new Ingredient('', '');
 
@@ -35,17 +34,17 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.data.subscribe((data: { recipe: Recipe }) => this.recipe = data.recipe);
-    this.route.params.subscribe((params: Params) => this.id = +params['id']);
   }
 
   ngOnDestroy() {
     document.body.style.backgroundImage = 'url(\'../../../assets/images/home.jpg\')';
   }
 
-  saveDescription() {
-    this.recipeService.updateRecipe(this.id, this.recipe);
-    console.log(this.recipe.description);
-    console.log('TODO: Actual storage to be implemented');
+  save() {
+    if (this.newIngredient.name && this.newIngredient.number) {
+      this.addIngredient();
+    }
+    this.recipeService.updateRecipe(this.recipe);
     this.toggleEditMode();
   }
 
@@ -55,6 +54,9 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
   }
 
   addIngredient() {
+    if (!this.recipe.ingredients) {
+      this.recipe.ingredients = [];
+    }
     this.recipe.ingredients.push(this.newIngredient);
     this.newIngredient = new Ingredient('', '');
   }
