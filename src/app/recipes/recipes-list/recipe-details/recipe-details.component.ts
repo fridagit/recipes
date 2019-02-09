@@ -1,7 +1,6 @@
-import { ActivatedRoute, Params } from '@angular/router';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DataStorageService } from '../../../services/data-storage.service';
-import { Ingredient, Recipe} from '../../../models';
+import {ActivatedRoute, Params} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Ingredient, Recipe} from '../../../models';
 import {RecipesService} from '../../../services/recipes.service';
 
 @Component({
@@ -15,7 +14,7 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
   edit: boolean;
   newIngredient: Ingredient = new Ingredient('', '');
 
-  constructor(private route: ActivatedRoute, private recipeService: RecipesService, private dataStorageService: DataStorageService) {
+  constructor(private route: ActivatedRoute, private recipeService: RecipesService) {
     document.body.style.backgroundImage = 'url(\'../../../assets/images/food.jpg\')';
 
   }
@@ -35,13 +34,8 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.id = +params['id'];
-          this.recipe = this.recipeService.getRecipe(this.id);
-        }
-      );
+    this.route.data.subscribe((data: { recipe: Recipe }) => this.recipe = data.recipe);
+    this.route.params.subscribe((params: Params) => this.id = +params['id']);
   }
 
   ngOnDestroy() {
@@ -50,7 +44,6 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
 
   saveDescription() {
     this.recipeService.updateRecipe(this.id, this.recipe);
-    // this.dataStorageService.storeRecipe(this.recipe);
     console.log(this.recipe.description);
     console.log('TODO: Actual storage to be implemented');
     this.toggleEditMode();

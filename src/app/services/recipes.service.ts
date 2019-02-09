@@ -1,13 +1,13 @@
-import { Observable, BehaviorSubject } from 'rxjs';
-import { DataStorageService } from './data-storage.service';
-import { Injectable, OnInit } from '@angular/core';
+import {Observable, BehaviorSubject} from 'rxjs';
+import {DataStorageService} from './data-storage.service';
+import {Injectable, OnInit} from '@angular/core';
 import {Recipe} from '../models';
-import { map } from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
-export class RecipesService  {
+export class RecipesService {
   /*recipes: Recipe[] = [
     {
       name: 'Flygande Jacob',
@@ -618,39 +618,28 @@ export class RecipesService  {
   };
 
   constructor(private db: DataStorageService) {
-    // this.db.getRecipes().subscribe(data => {
-    //   this.recipes = data.map(e => {
-    //     return {
-    //       id: e.payload.doc.id,
-    //       ...e.payload.doc.data()
-    //     } as Recipe;
-    //   });
-    //   console.log('1');
-    //   console.log(this.recipes);
-    // });
-    this.dataStore = { recipes: [] };
+    this.dataStore = {recipes: []};
     this._recipes = <BehaviorSubject<Recipe[]>>new BehaviorSubject([]);
     this.recipes = this._recipes.asObservable();
     this.loadRecipes();
   }
 
-  getRecipe(index: number) {
-    return this.dataStore.recipes[index];
+  getRecipe(index: string): Observable<Recipe> {
+    return this.recipes.pipe(
+      map(recipes => recipes.find(recipe => recipe.id === index))
+    );
   }
 
   updateRecipe(index: number, recipe: Recipe) {
-     this.db.updateRecipe(recipe);
+    this.db.updateRecipe(recipe);
   }
 
   private loadRecipes() {
-  this.db.loadRecipes().subscribe(data => {
-    this.dataStore.recipes = data.map(e => {
-      return {
-        id: e.payload.doc.id,
-        ...e.payload.doc.data()
-      } as Recipe;
+    this.db.loadRecipes().subscribe(data => {
+      this.dataStore.recipes = data.map(e =>
+        e.payload.doc.data()
+      );
+      this._recipes.next(Object.assign({}, this.dataStore).recipes);
     });
-    this._recipes.next(Object.assign({}, this.dataStore).recipes);
-  });
   }
 }
