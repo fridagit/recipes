@@ -4,6 +4,6 @@ export class Ingredient {
 
   constructor(name: string, number: string) {
     this.name = name;
-      this.number = number;
+    this.number = number;
   }
 }

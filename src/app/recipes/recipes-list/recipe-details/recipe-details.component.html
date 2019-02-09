@@ -1,34 +1,50 @@
 <div class="opaque container">
   <div class="row">
     <div class="col-4">
-      <img [src]="recipe.image" *ngIf="hasImage(recipe)" class="recipeImage img-fluid rounded"/>
-      <h2>{{recipe.name}}</h2>
-      <a [href]="recipe.url" *ngIf="recipe.url" target="_blank">{{hostname(recipe.url)}}</a>
-      <div class="justify-content-center">
-        <span class="header">Det här behöver du:</span>
-      </div>
-      <ul>
-        <li *ngFor="let ingredient of recipe.ingredients">
+      <div *ngIf="!edit">
+        <img [src]="recipe.image" *ngIf="hasImage(recipe)" class="recipeImage img-fluid rounded"/>
+        <h2 *ngIf="!edit">{{recipe.name}}</h2>
+        <a [href]="recipe.url" *ngIf="recipe.url" target="_blank">{{hostname(recipe.url)}}</a>
+        <div class="justify-content-center">
+          <span class="header">Det här behöver du:</span>
+        </div>
+        <div *ngFor="let ingredient of recipe.ingredients">
           {{ingredient.number}} {{ingredient.name}}
-        </li>
-      </ul>
+        </div>
+      </div>
+      <div *ngIf="edit" class="row p-3">
+        <span>Bild</span>
+        <input class="editable col-12" [(ngModel)]="recipe.image"/>
+        <span>Namn</span>
+        <input class="editable col-12" [(ngModel)]="recipe.name"/>
+        <span>Länk</span>
+        <input class="editable col-12" [(ngModel)]="recipe.url"/>
+        <span>Ingredienser</span>
+        <div *ngFor="let ingredient of recipe.ingredients">
+          <input class="editable col-3" [(ngModel)]="ingredient.number"/>
+          <input class="editable col-7" [(ngModel)]="ingredient.name"/>
+          <fa-icon class="col-1" icon="trash-alt" (click)="removeIngredient(ingredient)"></fa-icon>
+        </div>
+        <input class="editable col-3" [(ngModel)]="newIngredient.number"/>
+        <input class="editable col-7" [(ngModel)]="newIngredient.name"/>
+        <fa-icon class="col-1" icon="plus-circle" (click)="addIngredient()"></fa-icon>
+      </div>
     </div>
     <div class="col-8">
-      <div *ngIf="!editDescription">
-        <markdown ngPreserveWhitespaces class="col-12" title="edit-description" [data]="recipe.description">
-        </markdown>
-
+      <div *ngIf="!edit">
+        <markdown ngPreserveWhitespaces class="col-12" title="edit-description" [data]="recipe.description"></markdown>
+        <fa-icon class="edit-button" icon="pen" (click)="toggleEditMode()"></fa-icon>
       </div>
-      <div *ngIf="editDescription" class="edit-description container h-100">
-        <div class="row h-75">
-          <textarea class="col-12 rounded" title="edit-description" [(ngModel)]="recipe.description"></textarea>
+      <div *ngIf="edit" class="edit-description container h-100">
+        <div class="row">
+          <textarea class="col-12 rounded editable" title="edit-description"
+                    [(ngModel)]="recipe.description"></textarea>
         </div>
         <div class="row justify-content-around p-2">
-          <button class="col-5 btn btn-danger" type="button" (click)="toggleEditDescription()">Ångra</button>
+          <button class="col-5 btn btn-danger" type="button" (click)="toggleEditMode()">Ångra</button>
           <button class="col-5 btn btn-success" (click)="saveDescription()">Spara</button>
         </div>
       </div>
-      <fa-icon class="edit-button" icon="pen" (click)="toggleEditDescription()" *ngIf="!editDescription"></fa-icon>
     </div>
   </div>
 </div>

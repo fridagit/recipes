@@ -7,7 +7,7 @@
   text-transform: uppercase;
 }
 
-textarea {
+.editable {
   background-color: rgba(0,0,0, 0.5);
   color: white;
   border: 0;
@@ -15,6 +15,14 @@ textarea {
 
 .edit-description {
   padding: 30px;
+}
+
+.edit-description textarea {
+  height: 500px;
+}
+
+.edit-ingredients {
+  height: 400px;
 }
 
 .edit-button {

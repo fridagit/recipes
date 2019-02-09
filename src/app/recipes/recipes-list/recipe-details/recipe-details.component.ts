@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
-import {Recipe} from '../../../models';
+import {Ingredient, Recipe} from '../../../models';
 import {RecipesService} from '../../../services/recipes.service';
 import {DataStorageService} from '../../../services/data-storage.service';
 
@@ -12,7 +12,8 @@ import {DataStorageService} from '../../../services/data-storage.service';
 export class RecipeDetailsComponent implements OnInit, OnDestroy {
   recipe: Recipe;
   id: number;
-  editDescription: boolean;
+  edit: boolean;
+  newIngredient: Ingredient = new Ingredient('', '');
 
   constructor(private route: ActivatedRoute, private recipeService: RecipesService, private dataStorageService: DataStorageService) {
     document.body.style.backgroundImage = 'url(\'../../../assets/images/food.jpg\')';
@@ -29,8 +30,8 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     return recipe.image != null;
   }
 
-  toggleEditDescription() {
-    this.editDescription = !this.editDescription;
+  toggleEditMode() {
+    this.edit = !this.edit;
   }
 
   ngOnInit() {
@@ -51,6 +52,16 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     // this.dataStorageService.storeRecipe(this.recipe);
     console.log(this.recipe.description);
     console.log('TODO: Actual storage to be implemented');
-    this.toggleEditDescription();
+    this.toggleEditMode();
+  }
+
+  removeIngredient(ingredient: Ingredient) {
+    const index = this.recipe.ingredients.indexOf(ingredient);
+    this.recipe.ingredients.splice(index, 1);
+  }
+
+  addIngredient() {
+    this.recipe.ingredients.push(this.newIngredient);
+    this.newIngredient = new Ingredient('', '');
   }
 }
