@@ -1,9 +1,14 @@
-import {Injectable} from '@angular/core';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { DataStorageService } from './data-storage.service';
+import { Injectable, OnInit } from '@angular/core';
 import {Recipe} from '../models';
+import { map } from 'rxjs/operators';
 
-@Injectable()
-export class RecipesService {
-  recipes: Recipe[] = [
+@Injectable({
+  providedIn: 'root',
+})
+export class RecipesService  {
+  /*recipes: Recipe[] = [
     {
       name: 'Flygande Jacob',
       image: 'https://img.koket.se/media/flygande-jacob.jpg',
@@ -605,13 +610,47 @@ export class RecipesService {
       categories: [],
       date: new Date('2012-03-26'),
     }
-  ];
+  ];*/
+  recipes: Observable<Recipe[]>;
+  private _recipes: BehaviorSubject<Recipe[]>;
+  private dataStore: {
+    recipes: Recipe[]
+  };
 
-  getRecipe(index: number) {
-    return this.recipes[index];
+  constructor(private db: DataStorageService) {
+    // this.db.getRecipes().subscribe(data => {
+    //   this.recipes = data.map(e => {
+    //     return {
+    //       id: e.payload.doc.id,
+    //       ...e.payload.doc.data()
+    //     } as Recipe;
+    //   });
+    //   console.log('1');
+    //   console.log(this.recipes);
+    // });
+    this.dataStore = { recipes: [] };
+    this._recipes = <BehaviorSubject<Recipe[]>>new BehaviorSubject([]);
+    this.recipes = this._recipes.asObservable();
+    this.loadRecipes();
   }
 
-  getRecipes() {
-    return this.recipes.slice();
+  getRecipe(index: number) {
+    return this.dataStore.recipes[index];
+  }
+
+  updateRecipe(index: number, recipe: Recipe) {
+     this.db.updateRecipe(recipe);
+  }
+
+  private loadRecipes() {
+  this.db.loadRecipes().subscribe(data => {
+    this.dataStore.recipes = data.map(e => {
+      return {
+        id: e.payload.doc.id,
+        ...e.payload.doc.data()
+      } as Recipe;
+    });
+    this._recipes.next(Object.assign({}, this.dataStore).recipes);
+  });
   }
 }

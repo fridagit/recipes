@@ -21,16 +21,21 @@
         <input class="editable col-12" [(ngModel)]="recipe.url"/>
         <span>Ingredienser</span>
         <div *ngFor="let ingredient of recipe.ingredients">
-          <input class="editable col-3" [(ngModel)]="ingredient.number"/>
-          <input class="editable col-7" [(ngModel)]="ingredient.name"/>
-          <fa-icon class="col-1" icon="trash-alt" (click)="removeIngredient(ingredient)"></fa-icon>
+          <div class="row">
+            <input class="editable col-3" [(ngModel)]="ingredient.number"/>
+            <input class="editable col-7" [(ngModel)]="ingredient.name"/>
+            <fa-icon class="col-1" icon="trash-alt" (click)="removeIngredient(ingredient)"></fa-icon>
+          </div>
         </div>
-        <input class="editable col-3" [(ngModel)]="newIngredient.number"/>
-        <input class="editable col-7" [(ngModel)]="newIngredient.name"/>
-        <fa-icon class="col-1" icon="plus-circle" (click)="addIngredient()"></fa-icon>
+        <div class="row">
+          <input class="editable col-3" [(ngModel)]="newIngredient.number"/>
+          <input class="editable col-7" [(ngModel)]="newIngredient.name"/>
+          <fa-icon class="col-1" icon="plus-circle" (click)="addIngredient()"></fa-icon>
+        </div>  
       </div>
     </div>
     <div class="col-8">
+      <span class="header">Så här gör du</span>
       <div *ngIf="!edit">
         <markdown ngPreserveWhitespaces class="col-12" title="edit-description" [data]="recipe.description"></markdown>
         <fa-icon class="edit-button" icon="pen" (click)="toggleEditMode()"></fa-icon>

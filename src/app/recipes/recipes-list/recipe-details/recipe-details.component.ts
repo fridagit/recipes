@@ -1,8 +1,8 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
-import {Ingredient, Recipe} from '../../../models';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DataStorageService } from '../../../services/data-storage.service';
+import { Ingredient, Recipe} from '../../../models';
 import {RecipesService} from '../../../services/recipes.service';
-import {DataStorageService} from '../../../services/data-storage.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -49,6 +49,7 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
   }
 
   saveDescription() {
+    this.recipeService.updateRecipe(this.id, this.recipe);
     // this.dataStorageService.storeRecipe(this.recipe);
     console.log(this.recipe.description);
     console.log('TODO: Actual storage to be implemented');

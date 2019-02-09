@@ -1,8 +1,11 @@
+import { environment } from './../environments/environment';
 import {HttpModule} from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { MarkdownModule } from 'ngx-markdown';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -15,6 +18,7 @@ import { RecipeItemComponent } from './recipes/recipes-list/recipe-item/recipe-i
 import { RecipeDetailsComponent } from './recipes/recipes-list/recipe-details/recipe-details.component';
 import {FormsModule} from '@angular/forms';
 import { DataStorageService } from './services/data-storage.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -42,11 +46,13 @@ const appRoutes: Routes = [
     HttpModule,
     BrowserModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
     RouterModule.forRoot(appRoutes, { useHash: true }),
     MarkdownModule.forRoot(),
     FontAwesomeModule,
   ],
-  providers: [RecipesService, DataStorageService],
+  providers: [RecipesService, DataStorageService, AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule {
