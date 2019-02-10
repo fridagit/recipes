@@ -33,11 +33,19 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     document.body.style.backgroundImage = 'url(\'../../../assets/images/home.jpg\')';
   }
 
+  cancel() {
+    this.viewRecipe();
+  }
+
   save() {
     if (this.newIngredient.name && this.newIngredient.number) {
       this.addIngredient(this.newIngredient);
     }
     this.recipeService.createOrUpdateRecipe(this.recipe);
+    this.viewRecipe();
+  }
+
+  private viewRecipe() {
     this.router.navigate([`/recipes/${this.recipe.id}`]);
   }
 
