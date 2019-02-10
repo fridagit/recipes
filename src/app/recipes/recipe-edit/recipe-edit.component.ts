@@ -1,36 +1,22 @@
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Ingredient, Recipe} from '../../../models';
-import {RecipesService} from '../../../services/recipes.service';
+import {Ingredient, Recipe} from '../../models';
+import {RecipesService} from '../../services/recipes.service';
 
 @Component({
-  selector: 'app-recipe-details',
-  templateUrl: './recipe-details.component.html',
-  styleUrls: ['./recipe-details.component.scss']
+  selector: 'app-recipe-edit',
+  templateUrl: './recipe-edit.component.html',
+  styleUrls: ['./recipe-edit.component.scss']
 })
-export class RecipeDetailsComponent implements OnInit, OnDestroy {
+export class RecipeEditComponent implements OnInit, OnDestroy {
   @ViewChild('canvas') public canvas: ElementRef;
   recipe: Recipe;
   showImage = true;
-  edit: boolean;
   newIngredient: Ingredient = new Ingredient('', '');
   new: boolean;
 
-  constructor(private route: ActivatedRoute, private recipeService: RecipesService) {
+  constructor(private route: ActivatedRoute, private recipeService: RecipesService, private router: Router) {
     document.body.style.backgroundImage = 'url(\'../../../assets/images/food.jpg\')';
-  }
-
-  hostname(url: string) {
-    const l = document.createElement('a');
-    l.href = url;
-    return l.hostname;
-  }
-
-  toggleEditMode() {
-    this.edit = !this.edit;
-    if (!this.edit) {
-      this.showImage = true;
-    }
   }
 
   ngOnInit() {
@@ -38,7 +24,6 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
       this.recipe = data.recipe;
       if (!this.recipe) {
         this.recipe = new Recipe();
-        this.edit = true;
         this.showImage = false;
       }
     });
@@ -50,10 +35,10 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
 
   save() {
     if (this.newIngredient.name && this.newIngredient.number) {
-      this.addIngredient();
+      this.addIngredient(this.newIngredient);
     }
     this.recipeService.createOrUpdateRecipe(this.recipe);
-    this.toggleEditMode();
+    this.router.navigate([`/recipes/${this.recipe.id}`]);
   }
 
   removeIngredient(ingredient: Ingredient) {
@@ -61,11 +46,11 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     this.recipe.ingredients.splice(index, 1);
   }
 
-  addIngredient() {
+  addIngredient(newIngredient: Ingredient) {
     if (!this.recipe.ingredients) {
       this.recipe.ingredients = [];
     }
-    this.recipe.ingredients.push(this.newIngredient);
+    this.recipe.ingredients.push(newIngredient);
     this.newIngredient = new Ingredient('', '');
   }
 

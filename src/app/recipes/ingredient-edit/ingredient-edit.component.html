@@ -1,0 +1,5 @@
+<div>
+  <input class="editable col-3" [(ngModel)]="ingredient.number"/>
+  <input class="editable col-7" [(ngModel)]="ingredient.name"/>
+  <fa-icon class="col-1" icon="{{icon}}" (click)="clicked.emit(ingredient)"></fa-icon>
+</div>

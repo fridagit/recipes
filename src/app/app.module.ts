@@ -1,4 +1,4 @@
-import {environment} from './../environments/environment';
+import {environment} from '../environments/environment';
 import {HttpModule} from '@angular/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
@@ -19,20 +19,27 @@ import {AppComponent} from './app.component';
 import {SearchComponent} from './search/search.component';
 import {HomeComponent} from './home/home.component';
 import {RecipesListComponent} from './recipes/recipes-list/recipes-list.component';
-import {RecipeItemComponent} from './recipes/recipes-list/recipe-item/recipe-item.component';
-import {RecipeDetailsComponent} from './recipes/recipes-list/recipe-details/recipe-details.component';
+import {RecipeItemComponent} from './recipes/recipe-item/recipe-item.component';
+import {IngredientEditComponent} from './recipes/ingredient-edit/ingredient-edit.component';
 
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {fas} from '@fortawesome/free-solid-svg-icons';
 import {far} from '@fortawesome/free-regular-svg-icons';
+import {RecipeViewComponent} from './recipes/recipe-view/recipe-view.component';
+import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'search', component: SearchComponent},
   {path: 'recipes', component: RecipesListComponent},
-  {path: 'recipes/new', component: RecipeDetailsComponent},
+  {path: 'recipes/new', component: RecipeEditComponent},
   {
-    path: 'recipes/:id', component: RecipeDetailsComponent, resolve: {
+    path: 'recipes/:id', component: RecipeViewComponent, resolve: {
+      recipe: RecipeResolverService
+    }
+  },
+  {
+    path: 'recipes/:id/edit', component: RecipeEditComponent, resolve: {
       recipe: RecipeResolverService
     }
   },
@@ -46,7 +53,9 @@ const appRoutes: Routes = [
     HomeComponent,
     RecipesListComponent,
     RecipeItemComponent,
-    RecipeDetailsComponent
+    RecipeViewComponent,
+    RecipeEditComponent,
+    IngredientEditComponent
   ],
   imports: [
     FormsModule,

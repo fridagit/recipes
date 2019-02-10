@@ -7,12 +7,6 @@
   text-transform: uppercase;
 }
 
-.editable {
-  background-color: rgba(0,0,0, 0.5);
-  color: white;
-  border: 0;
-}
-
 .edit-description {
   padding: 30px;
 }
@@ -23,10 +17,4 @@
 
 .edit-ingredients {
   height: 400px;
-}
-
-.edit-button {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
 }
