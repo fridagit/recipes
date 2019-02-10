@@ -1,8 +1,8 @@
 <div class="opaque container" (paste)="paste($event)">
   <div class="row">
     <div class="col-4">
+      <img [src]="recipe.image" *ngIf="showImage" class="img-fluid rounded"/>
       <div *ngIf="!edit">
-        <img [src]="recipe.image" class="recipeImage img-fluid rounded"/>
         <h2 *ngIf="!edit">{{recipe.name}}</h2>
         <a [href]="recipe.url" *ngIf="recipe.url" target="_blank">{{hostname(recipe.url)}}</a>
         <div class="justify-content-center" *ngIf="recipe.ingredients">
@@ -13,7 +13,7 @@
         </div>
       </div>
       <div *ngIf="edit" class="row p-3">
-        <canvas #canvas class="recipeImage img-fluid rounded"></canvas>
+        <canvas #canvas height="0" class="col-12"></canvas>
         <span>Namn</span>
         <input class="editable col-12" [(ngModel)]="recipe.name"/>
         <span>Länk</span>

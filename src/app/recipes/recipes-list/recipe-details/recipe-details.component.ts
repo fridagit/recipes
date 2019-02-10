@@ -11,6 +11,7 @@ import {RecipesService} from '../../../services/recipes.service';
 export class RecipeDetailsComponent implements OnInit, OnDestroy {
   @ViewChild('canvas') public canvas: ElementRef;
   recipe: Recipe;
+  showImage = true;
   edit: boolean;
   newIngredient: Ingredient = new Ingredient('', '');
 
@@ -27,6 +28,9 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
 
   toggleEditMode() {
     this.edit = !this.edit;
+    if (!this.edit) {
+      this.showImage = true;
+    }
   }
 
   ngOnInit() {
@@ -66,6 +70,7 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
           const item: any = items[i];
           if (item.type.indexOf('image') > -1) {
             const blob = item.getAsFile();
+            this.showImage = false;
             this.paintImage(blob, this.recipe);
           }
         }
@@ -78,9 +83,9 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     const ctx = canvasElement.getContext('2d');
     const img = new Image();
     img.onload = function () {
-      canvasElement.width = '300';
-      canvasElement.height = '300';
-      ctx.drawImage(img, 0, 0, 300, 300 * img.height / img.width);
+      canvasElement.width = img.width;
+      canvasElement.height = img.height;
+      ctx.drawImage(img, 0, 0);
       recipe.image = canvasElement.toDataURL('image/png');
     };
     img.src = window.URL.createObjectURL(blob);
