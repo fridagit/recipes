@@ -27,8 +27,8 @@ export class RecipesService {
     );
   }
 
-  updateRecipe(recipe: Recipe) {
-    this.db.updateRecipe(recipe);
+  createOrUpdateRecipe(recipe: Recipe) {
+    this.db.createOrUpdateRecipe(recipe);
   }
 
   private loadRecipes() {

@@ -30,6 +30,7 @@ const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'search', component: SearchComponent},
   {path: 'recipes', component: RecipesListComponent},
+  {path: 'recipes/new', component: RecipeDetailsComponent},
   {
     path: 'recipes/:id', component: RecipeDetailsComponent, resolve: {
       recipe: RecipeResolverService

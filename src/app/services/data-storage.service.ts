@@ -19,11 +19,12 @@ export class DataStorageService {
     return this.fireStore.collection<Recipe>('recipes', ref => ref.orderBy('name')).snapshotChanges();
   }
 
-  updateRecipe(recipe: Recipe) {
-    this.recipesCollectionRef.doc(recipe.id).update(JSON.parse(JSON.stringify(recipe)));
-  }
-
-  storeRecipe(recipe: Recipe) {
-    this.recipesCollectionRef.add(recipe);
+  createOrUpdateRecipe(recipe: Recipe) {
+    const recipeObject = JSON.parse(JSON.stringify(recipe));
+    if (recipe.id) {
+      this.recipesCollectionRef.doc(recipe.id).update(recipeObject);
+    } else {
+      this.recipesCollectionRef.add(recipeObject);
+    }
   }
 }

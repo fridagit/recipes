@@ -14,10 +14,10 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
   showImage = true;
   edit: boolean;
   newIngredient: Ingredient = new Ingredient('', '');
+  new: boolean;
 
   constructor(private route: ActivatedRoute, private recipeService: RecipesService) {
     document.body.style.backgroundImage = 'url(\'../../../assets/images/food.jpg\')';
-
   }
 
   hostname(url: string) {
@@ -34,7 +34,14 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.route.data.subscribe((data: { recipe: Recipe }) => this.recipe = data.recipe);
+    this.route.data.subscribe((data: { recipe: Recipe }) => {
+      this.recipe = data.recipe;
+      if (!this.recipe) {
+        this.recipe = new Recipe();
+        this.edit = true;
+        this.showImage = false;
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -45,7 +52,7 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     if (this.newIngredient.name && this.newIngredient.number) {
       this.addIngredient();
     }
-    this.recipeService.updateRecipe(this.recipe);
+    this.recipeService.createOrUpdateRecipe(this.recipe);
     this.toggleEditMode();
   }
 
