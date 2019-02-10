@@ -16,7 +16,7 @@ export class DataStorageService {
   }
 
   loadRecipes() {
-    return this.fireStore.collection<Recipe>('recipes').snapshotChanges();
+    return this.fireStore.collection<Recipe>('recipes', ref => ref.orderBy('name')).snapshotChanges();
   }
 
   updateRecipe(recipe: Recipe) {

@@ -1,5 +1,5 @@
 import {ActivatedRoute, Params} from '@angular/router';
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Ingredient, Recipe} from '../../../models';
 import {RecipesService} from '../../../services/recipes.service';
 
@@ -9,6 +9,7 @@ import {RecipesService} from '../../../services/recipes.service';
   styleUrls: ['./recipe-details.component.scss']
 })
 export class RecipeDetailsComponent implements OnInit, OnDestroy {
+  @ViewChild('canvas') public canvas: ElementRef;
   recipe: Recipe;
   edit: boolean;
   newIngredient: Ingredient = new Ingredient('', '');
@@ -22,10 +23,6 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     const l = document.createElement('a');
     l.href = url;
     return l.hostname;
-  }
-
-  hasImage(recipe: Recipe) {
-    return recipe.image != null;
   }
 
   toggleEditMode() {
@@ -59,5 +56,33 @@ export class RecipeDetailsComponent implements OnInit, OnDestroy {
     }
     this.recipe.ingredients.push(this.newIngredient);
     this.newIngredient = new Ingredient('', '');
+  }
+
+  paste(pasteEvent) {
+    if (pasteEvent.clipboardData) {
+      const items: [] = pasteEvent.clipboardData.items;
+      if (items) {
+        for (let i = 0; i < items.length; i++) {
+          const item: any = items[i];
+          if (item.type.indexOf('image') > -1) {
+            const blob = item.getAsFile();
+            this.paintImage(blob, this.recipe);
+          }
+        }
+      }
+    }
+  }
+
+  private paintImage(blob, recipe: Recipe) {
+    const canvasElement = this.canvas.nativeElement;
+    const ctx = canvasElement.getContext('2d');
+    const img = new Image();
+    img.onload = function () {
+      canvasElement.width = '300';
+      canvasElement.height = '300';
+      ctx.drawImage(img, 0, 0, 300, 300 * img.height / img.width);
+      recipe.image = canvasElement.toDataURL('image/png');
+    };
+    img.src = window.URL.createObjectURL(blob);
   }
 }

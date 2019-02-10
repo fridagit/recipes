@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Recipe } from '../../../models';
+import {Component, OnInit, Input} from '@angular/core';
+import {Recipe} from '../../../models';
 
 @Component({
   selector: 'app-recipe-item',
@@ -8,14 +8,14 @@ import { Recipe } from '../../../models';
 })
 export class RecipeItemComponent implements OnInit {
   @Input() recipe: Recipe;
+  image: string;
   @Input() index: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
-    if (!this.recipe.image) {
-      this.recipe.image = '../../../../assets/images/table2.jpg';
-    }
+    this.image = this.recipe.image || '../../../../assets/images/table2.jpg';
   }
 
 }
