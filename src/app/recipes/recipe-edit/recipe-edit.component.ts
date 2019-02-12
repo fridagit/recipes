@@ -13,6 +13,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   recipe: Recipe;
   showImage = true;
   newIngredient: Ingredient = new Ingredient('', '');
+  newCategory: String = '';
   new: boolean;
 
   constructor(private route: ActivatedRoute, private recipeService: RecipesService, private router: Router) {
@@ -41,6 +42,9 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     if (this.newIngredient.name && this.newIngredient.number) {
       this.addIngredient(this.newIngredient);
     }
+    if (this.newCategory) {
+      this.addCategory(this.newCategory);
+    }
     this.recipeService.createOrUpdateRecipe(this.recipe);
     this.viewRecipe();
   }
@@ -60,6 +64,19 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     }
     this.recipe.ingredients.push(newIngredient);
     this.newIngredient = new Ingredient('', '');
+  }
+
+  addCategory(newCategory: String) {
+    if (!this.recipe.categories) {
+      this.recipe.categories = [];
+    }
+    this.recipe.categories.push(newCategory);
+    this.newCategory = '';
+  }
+
+  removeCategory(category: string) {
+    const index = this.recipe.categories.indexOf(category);
+    this.recipe.categories.splice(index, 1);
   }
 
   paste(pasteEvent) {

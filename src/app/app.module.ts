@@ -27,6 +27,7 @@ import {fas} from '@fortawesome/free-solid-svg-icons';
 import {far} from '@fortawesome/free-regular-svg-icons';
 import {RecipeViewComponent} from './recipes/recipe-view/recipe-view.component';
 import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
+import { CategoryEditComponent } from './recipes/category-edit/category-edit.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -55,7 +56,8 @@ const appRoutes: Routes = [
     RecipeItemComponent,
     RecipeViewComponent,
     RecipeEditComponent,
-    IngredientEditComponent
+    IngredientEditComponent,
+    CategoryEditComponent
   ],
   imports: [
     FormsModule,

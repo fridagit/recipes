@@ -23,6 +23,12 @@
           <textarea class="col-12 rounded editable" title="edit-description"
                     [(ngModel)]="recipe.description"></textarea>
         </div>
+        <div class="col-12">
+          <span>Kategorier</span>
+          <app-category-edit *ngFor="let category of recipe.categories" [category]="category" icon="trash-alt" (clicked)="removeCategory($event)"></app-category-edit>
+          <app-category-edit [category]="newCategory" icon="plus-circle" (clicked)="addCategory($event)"></app-category-edit>
+
+        </div>
         <div class="row justify-content-around p-2">
           <button class="col-5 btn btn-danger" type="button" (click)="cancel()">Ångra</button>
           <button class="col-5 btn btn-success" (click)="save()">Spara</button>
