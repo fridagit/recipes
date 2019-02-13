@@ -1,4 +1,5 @@
 import {Ingredient} from './ingredient.model';
+import { Category } from './category.model';
 
 export class Recipe {
   id?: string;
@@ -6,7 +7,7 @@ export class Recipe {
   date?: Date;
   image?: string;
   url: string;
-  categories?: String[];
+  categories?: Category[];
   description?: string;
   ingredients?: Ingredient[];
 }

@@ -1,6 +1,6 @@
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Ingredient, Recipe} from '../../models';
+import {Ingredient, Recipe, Category} from '../../models';
 import {RecipesService} from '../../services/recipes.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   recipe: Recipe;
   showImage = true;
   newIngredient: Ingredient = new Ingredient('', '');
-  newCategory: String = '';
+  newCategory: Category = new Category('');
   new: boolean;
 
   constructor(private route: ActivatedRoute, private recipeService: RecipesService, private router: Router) {
@@ -42,7 +42,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     if (this.newIngredient.name && this.newIngredient.number) {
       this.addIngredient(this.newIngredient);
     }
-    if (this.newCategory) {
+    if (this.newCategory.name) {
       this.addCategory(this.newCategory);
     }
     this.recipeService.createOrUpdateRecipe(this.recipe);
@@ -66,15 +66,15 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     this.newIngredient = new Ingredient('', '');
   }
 
-  addCategory(newCategory: String) {
+  addCategory(newCategory: Category) {
     if (!this.recipe.categories) {
       this.recipe.categories = [];
     }
     this.recipe.categories.push(newCategory);
-    this.newCategory = '';
+    this.newCategory = new Category('');
   }
 
-  removeCategory(category: string) {
+  removeCategory(category: Category) {
     const index = this.recipe.categories.indexOf(category);
     this.recipe.categories.splice(index, 1);
   }

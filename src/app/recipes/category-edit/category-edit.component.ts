@@ -1,4 +1,5 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
+import { Category } from '../../models';
 
 @Component({
   selector: 'app-category-edit',
@@ -7,9 +8,9 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 })
 export class CategoryEditComponent {
   @Input()
-  category: String;
+  category: Category;
   @Input()
   icon: string;
   @Output()
-  clicked = new EventEmitter<String>();
+  clicked = new EventEmitter<Category>();
 }
