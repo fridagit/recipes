@@ -22,9 +22,7 @@ export class RecipesService {
   }
 
   getRecipe(id: string): Observable<Recipe> {
-    return this.recipes.pipe(
-      map(recipes => recipes.find(recipe => recipe.id === id))
-    );
+    return this.db.getRecipe(id);
   }
 
   createOrUpdateRecipe(recipe: Recipe) {
