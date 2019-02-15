@@ -38,6 +38,11 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     this.viewRecipe();
   }
 
+  delete() {
+    this.recipeService.removeRecipe(this.recipe);
+    this.router.navigate([`/recipes/`]);
+  }
+
   save() {
     if (this.newIngredient.name && this.newIngredient.number) {
       this.addIngredient(this.newIngredient);

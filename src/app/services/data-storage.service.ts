@@ -35,4 +35,8 @@ export class DataStorageService {
       this.recipesCollectionRef.add(recipeObject);
     }
   }
+
+  removeRecipe(recipe: Recipe) {
+    this.recipesCollectionRef.doc(recipe.id).delete();
+  }
 }

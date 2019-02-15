@@ -29,6 +29,10 @@ export class RecipesService {
     this.db.createOrUpdateRecipe(recipe);
   }
 
+  removeRecipe(recipe: Recipe) {
+    this.db.removeRecipe(recipe);
+  }
+
   private loadRecipes() {
     this.db.loadRecipes().subscribe(data => {
       this.dataStore.recipes = data.map(e => {
