@@ -1,6 +1,6 @@
 <div class="opaque container">
   <div class="row">
-    <div class="col-4">
+    <div class="col-md-4">
       <img [src]="recipe.image" class="img-fluid rounded"/>
       <div>
         <h2>{{recipe.name}}</h2>
@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <div class="col-8">
+    <div class="col-md-8">
       <span class="header">Så här gör du</span>
       <div>
         <markdown ngPreserveWhitespaces class="col-12" title="edit-description" [data]="recipe.description"></markdown>
@@ -22,9 +22,9 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-4">
+    <div class="col-md-4">
     </div>
-    <div class="col-8 categories">
+    <div class="col-md-8 categories">
       <span *ngFor="let c of recipe.categories">
         {{c.name}} |
       </span>

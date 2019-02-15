@@ -1,6 +1,6 @@
 <div class="opaque container" (paste)="paste($event)">
   <div class="row">
-    <div class="col-4">
+    <div class="col-md-4">
       <img [src]="recipe.image" *ngIf="showImage" class="img-fluid rounded"/>
       <div class="row p-3">
         <canvas #canvas width="286" height="0"></canvas>
@@ -17,7 +17,7 @@
         <app-ingredient-edit [ingredient]="newIngredient" icon="plus-circle" (clicked)="addIngredient($event)"></app-ingredient-edit>
       </div>
     </div>
-    <div class="col-8">
+    <div class="col-md-8">
       <div class="edit-description container h-100">
         <div class="row">
           <textarea class="col-12 rounded editable" title="edit-description"
