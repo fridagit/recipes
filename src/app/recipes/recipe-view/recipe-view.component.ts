@@ -28,6 +28,7 @@ export class RecipeViewComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.data.subscribe((data: { recipe: Recipe }) => {
       this.recipe = data.recipe;
+      this.recipe.image = this.recipe.image || '';
     });
   }
 
