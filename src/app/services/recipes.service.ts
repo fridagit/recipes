@@ -35,12 +35,7 @@ export class RecipesService {
 
   private loadRecipes() {
     this.db.loadRecipes().subscribe(data => {
-      this.dataStore.recipes = data.map(e => {
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        } as Recipe;
-      });
+      this.dataStore.recipes = data.map(e => this.db.payloadAsRecipe(e.payload.doc));
       this._recipes.next(Object.assign({}, this.dataStore).recipes);
     });
   }

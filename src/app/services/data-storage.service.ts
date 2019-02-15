@@ -23,8 +23,15 @@ export class DataStorageService {
   getRecipe(id: string): Observable<Recipe> {
     const doc = this.fireStore.collection<Recipe>('recipes').doc(id);
     return doc.snapshotChanges().pipe(
-      map(data => data.payload.data() as Recipe)
+      map(data => this.payloadAsRecipe(data.payload))
     );
+  }
+
+  public payloadAsRecipe(payload) {
+    return {
+      id: payload.id,
+      ...payload.data()
+    } as Recipe;
   }
 
   createOrUpdateRecipe(recipe: Recipe) {
