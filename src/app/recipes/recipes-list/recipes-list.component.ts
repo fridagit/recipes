@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Recipe} from '../../models';
 
 import {RecipesService} from '../../services/recipes.service';
@@ -15,19 +15,13 @@ import {map} from 'rxjs/operators';
   templateUrl: './recipes-list.component.html',
   styleUrls: ['./recipes-list.component.scss']
 })
-export class RecipesListComponent implements OnInit, OnDestroy {
+export class RecipesListComponent implements OnInit {
   recipes: Observable<Recipe[]>;
 
   constructor(private db: AngularFireDatabase, private recipesService: RecipesService) {
-
-    document.body.style.backgroundImage = 'url(\'../../../assets/images/food.jpg\')';
   }
 
   ngOnInit() {
     this.recipes = this.recipesService.recipes;
-  }
-
-  ngOnDestroy() {
-    document.body.style.backgroundImage = 'url(\'../../../assets/images/home.jpg\')';
   }
 }

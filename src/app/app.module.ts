@@ -18,8 +18,6 @@ import {DataStorageService} from './services/data-storage.service';
 import {AngularFirestore} from '@angular/fire/firestore';
 
 import {AppComponent} from './app.component';
-import {SearchComponent} from './search/search.component';
-import {HomeComponent} from './home/home.component';
 import {RecipesListComponent} from './recipes/recipes-list/recipes-list.component';
 import {RecipeItemComponent} from './recipes/recipe-item/recipe-item.component';
 import {IngredientEditComponent} from './recipes/ingredient-edit/ingredient-edit.component';
@@ -32,28 +30,24 @@ import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
 import { CategoryEditComponent } from './recipes/category-edit/category-edit.component';
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'search', component: SearchComponent},
-  {path: 'recipes', component: RecipesListComponent},
-  {path: 'recipes/new', component: RecipeEditComponent},
+  {path: '', component: RecipesListComponent},
+  {path: 'new', component: RecipeEditComponent},
   {
-    path: 'recipes/:id', component: RecipeViewComponent, resolve: {
+    path: ':id', component: RecipeViewComponent, resolve: {
       recipe: RecipeResolverService
     }
   },
   {
-    path: 'recipes/:id/edit', component: RecipeEditComponent, resolve: {
+    path: ':id/edit', component: RecipeEditComponent, resolve: {
       recipe: RecipeResolverService
     }
   },
-  {path: '**', component: HomeComponent}
+  {path: '**', component: RecipesListComponent}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent,
-    HomeComponent,
     RecipesListComponent,
     RecipeItemComponent,
     RecipeViewComponent,

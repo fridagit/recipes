@@ -21,7 +21,7 @@ export class RecipeResolverService implements Resolve<Recipe> {
         if (recipe) {
           return of(recipe);
         } else { // id not found
-          this.router.navigate(['/recipes']);
+          this.router.navigate(['/']);
           return EMPTY;
         }
       })

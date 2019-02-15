@@ -1,5 +1,5 @@
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Ingredient, Recipe, Category} from '../../models';
 import {RecipesService} from '../../services/recipes.service';
 import {ToastrService} from 'ngx-toastr';
@@ -9,7 +9,7 @@ import {ToastrService} from 'ngx-toastr';
   templateUrl: './recipe-edit.component.html',
   styleUrls: ['./recipe-edit.component.scss']
 })
-export class RecipeEditComponent implements OnInit, OnDestroy {
+export class RecipeEditComponent implements OnInit {
   @ViewChild('canvas') public canvas: ElementRef;
   @ViewChild('container') public container: ElementRef;
   recipe: Recipe;
@@ -19,7 +19,6 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   new: boolean;
 
   constructor(private route: ActivatedRoute, private recipeService: RecipesService, private router: Router, private toastr: ToastrService) {
-    document.body.style.backgroundImage = 'url(\'../../../assets/images/food.jpg\')';
   }
 
   ngOnInit() {
@@ -33,17 +32,13 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    document.body.style.backgroundImage = 'url(\'../../../assets/images/home.jpg\')';
-  }
-
   cancel() {
     this.viewRecipe();
   }
 
   delete() {
     this.recipeService.removeRecipe(this.recipe);
-    this.router.navigate([`/recipes/`]);
+    this.router.navigate([`/`]);
   }
 
   save() {
@@ -58,7 +53,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   }
 
   private viewRecipe() {
-    this.router.navigate([`/recipes/${this.recipe.id}`]);
+    this.router.navigate([`/${this.recipe.id}`]);
   }
 
   removeIngredient(ingredient: Ingredient) {
