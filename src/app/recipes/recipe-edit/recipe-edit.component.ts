@@ -2,6 +2,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Ingredient, Recipe, Category} from '../../models';
 import {RecipesService} from '../../services/recipes.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -10,13 +11,14 @@ import {RecipesService} from '../../services/recipes.service';
 })
 export class RecipeEditComponent implements OnInit, OnDestroy {
   @ViewChild('canvas') public canvas: ElementRef;
+  @ViewChild('container') public container: ElementRef;
   recipe: Recipe;
   showImage = true;
   newIngredient: Ingredient = new Ingredient('', '');
   newCategory: Category = new Category('');
   new: boolean;
 
-  constructor(private route: ActivatedRoute, private recipeService: RecipesService, private router: Router) {
+  constructor(private route: ActivatedRoute, private recipeService: RecipesService, private router: Router, private toastr: ToastrService) {
     document.body.style.backgroundImage = 'url(\'../../../assets/images/food.jpg\')';
   }
 
@@ -93,23 +95,55 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
           if (item.type.indexOf('image') > -1) {
             const blob = item.getAsFile();
             this.showImage = false;
-            this.paintImage(blob, this.recipe);
+            this.paintImage(blob);
           }
         }
       }
     }
   }
 
-  private paintImage(blob, recipe: Recipe) {
+  private paintImage(blob) {
     const canvasElement = this.canvas.nativeElement;
+    canvasElement.height = 190;
     const ctx = canvasElement.getContext('2d');
     const img = new Image();
-    img.onload = function () {
-      canvasElement.width = img.width;
-      canvasElement.height = img.height;
-      ctx.drawImage(img, 0, 0);
-      recipe.image = canvasElement.toDataURL('image/png');
+    img.onload = () => {
+      this.drawImageCroppedAndScaled(img, ctx)
+        .then(() => {
+          this.recipe.image = canvasElement.toDataURL('image/png');
+        })
+        .catch((err) => {
+          this.toastr.error(err, 'Ajdå! 🙄', {disableTimeOut: true});
+          canvasElement.height = 0;
+          this.showImage = true;
+        });
     };
     img.src = window.URL.createObjectURL(blob);
+  }
+
+  private drawImageCroppedAndScaled(img, ctx) {
+    return new Promise((resolve, reject) => {
+      const canvas = ctx.canvas;
+      if (img.width < canvas.width || img.height < canvas.height) {
+        reject('Verkar visst som bilden du ville använda var för liten. Prova med en större bild!');
+      } else {
+        const cropRatio = canvas.width / canvas.height;
+        const origRatio = img.width / img.height;
+        let srcWidth = img.width;
+        let srcHeight = img.height;
+        let srcX = 0;
+        let srcY = 0;
+        if (origRatio > cropRatio) {
+          srcWidth = cropRatio * img.height;
+          srcX = (img.width - srcWidth) / 2;
+        } else {
+          srcHeight = img.height / cropRatio;
+          srcY = (img.height - srcHeight) / 2;
+        }
+        ctx.drawImage(img, srcX, srcY, srcWidth, srcHeight,
+          0, 0, canvas.width, canvas.height);
+        resolve();
+      }
+    });
   }
 }

@@ -9,6 +9,8 @@ import {AngularFireDatabaseModule, AngularFireDatabase} from 'angularfire2/datab
 import {MarkdownModule} from 'ngx-markdown';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FormsModule} from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import {RecipesService} from './services/recipes.service';
 import {RecipeResolverService} from './services/recipe-resolver.service';
@@ -69,6 +71,10 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, {useHash: true}),
     MarkdownModule.forRoot(),
     FontAwesomeModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+    }),
   ],
   providers: [RecipesService, DataStorageService, AngularFirestore],
   bootstrap: [AppComponent]
