@@ -28,6 +28,8 @@ import {far} from '@fortawesome/free-regular-svg-icons';
 import {RecipeViewComponent} from './recipes/recipe-view/recipe-view.component';
 import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
 import {CategoryEditComponent} from './recipes/category-edit/category-edit.component';
+import {SearchComponent} from './recipes/search/search.component';
+import {SearchService} from './services/search.service';
 
 const appRoutes: Routes = [
   {path: '', component: RecipesListComponent},
@@ -53,7 +55,8 @@ const appRoutes: Routes = [
     RecipeViewComponent,
     RecipeEditComponent,
     IngredientEditComponent,
-    CategoryEditComponent
+    CategoryEditComponent,
+    SearchComponent
   ],
   imports: [
     FormsModule,
@@ -73,7 +76,7 @@ const appRoutes: Routes = [
       preventDuplicates: true,
     }),
   ],
-  providers: [RecipesService, DataStorageService, AngularFirestore],
+  providers: [RecipesService, DataStorageService, AngularFirestore, SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

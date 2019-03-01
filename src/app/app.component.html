@@ -1,19 +1,22 @@
 <nav class="opaque navbar navbar-expand-lg navbar-light fixed-top">
-  <a routerLink="/"><img class="logo" src="../assets/images/logo.png" /></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+  <a routerLink="/"><img class="logo" src="../assets/images/logo.png"/></a>
+  <app-search class="col-6 d-md-none"></app-search>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-                <a class="nav-link disabled" routerLink="/new">Lägg till recept</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <a class="btn btn-outline-success my-2 my-sm-0">Logga in</a>
-        </form>
-    </div>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item">
+        <a class="nav-link disabled" routerLink="/new">Lägg till recept</a>
+      </li>
+    </ul>
+    <app-search class="col-3 d-none d-md-inline"></app-search>
+    <form class="form-inline my-2 my-lg-0">
+      <a class="btn btn-outline-success my-2 my-sm-0">Logga in</a>
+    </form>
+  </div>
 </nav>
 <div class="container-fluid">
   <router-outlet></router-outlet>

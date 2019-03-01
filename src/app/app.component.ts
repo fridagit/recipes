@@ -1,6 +1,7 @@
-import {Component, OnInit, Inject, PLATFORM_ID, AfterContentChecked} from '@angular/core';
-import {Router, NavigationEnd, NavigationStart} from '@angular/router';
-import {LocationStrategy, isPlatformBrowser} from '@angular/common';
+import {AfterContentChecked, Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
+import {NavigationEnd, NavigationStart, Router} from '@angular/router';
+import {isPlatformBrowser, LocationStrategy} from '@angular/common';
+import {Observable, Subject} from 'rxjs';
 
 @Component({
   selector: 'app-root',
