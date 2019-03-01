@@ -9,8 +9,8 @@ import {AngularFireDatabaseModule, AngularFireDatabase} from 'angularfire2/datab
 import {MarkdownModule} from 'ngx-markdown';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FormsModule} from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
 
 import {RecipesService} from './services/recipes.service';
 import {RecipeResolverService} from './services/recipe-resolver.service';
@@ -27,7 +27,7 @@ import {fas} from '@fortawesome/free-solid-svg-icons';
 import {far} from '@fortawesome/free-regular-svg-icons';
 import {RecipeViewComponent} from './recipes/recipe-view/recipe-view.component';
 import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
-import { CategoryEditComponent } from './recipes/category-edit/category-edit.component';
+import {CategoryEditComponent} from './recipes/category-edit/category-edit.component';
 
 const appRoutes: Routes = [
   {path: '', component: RecipesListComponent},
@@ -62,7 +62,10 @@ const appRoutes: Routes = [
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    RouterModule.forRoot(appRoutes, {useHash: true}),
+    RouterModule.forRoot(appRoutes, {
+      scrollPositionRestoration: 'enabled',
+      useHash: true
+    }),
     MarkdownModule.forRoot(),
     FontAwesomeModule,
     BrowserAnimationsModule,
