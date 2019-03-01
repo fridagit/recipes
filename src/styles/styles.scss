@@ -1,14 +1,6 @@
 @import "variables";
 @import "~bootstrap/scss/bootstrap";
 @import '~ngx-toastr/toastr.css';
-/*html {
-  margin-left: calc(100vw - 100%);
-}
-
-body {
-  margin: auto;
-  color: #fff;
-}*/
 
 body, html {
   height: 100%;
@@ -32,10 +24,4 @@ a, a:visited, a:hover, a:active {
 
 .card {
   background-color: $card-background !important;
-}
-
-.editable {
-  background-color: rgba(0,0,0, 0.5);
-  color: white;
-  border: 0;
 }

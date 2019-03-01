@@ -1,9 +1,9 @@
 <div class="opaque container">
   <div class="row">
     <div class="col-md-4">
-      <img [src]="recipe.image" class="img-fluid rounded"/>
+      <img [src]="recipe.image" class="img-fluid rounded mt-3"/>
       <div>
-        <h2>{{recipe.name}}</h2>
+        <h4>{{recipe.name}}</h4>
         <a [href]="recipe.url" *ngIf="recipe.url" target="_blank">{{hostname(recipe.url)}}</a>
         <div class="justify-content-center" *ngIf="recipe.ingredients">
           <span class="header">Det här behöver du:</span>
@@ -13,10 +13,10 @@
         </div>
       </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 mt-3">
       <span class="header">Så här gör du</span>
       <div>
-        <markdown ngPreserveWhitespaces class="col-12" title="edit-description" [data]="recipe.description"></markdown>
+        <markdown ngPreserveWhitespaces class="col-12" title="edit-description" [data]="recipe.description || '<i>Ingen beskrivning inlagd än!</i> 😱'"></markdown>
         <fa-icon class="edit-button" icon="pen" (click)="toggleEditMode()"></fa-icon>
       </div>
     </div>

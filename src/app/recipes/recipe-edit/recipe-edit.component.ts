@@ -98,6 +98,12 @@ export class RecipeEditComponent implements OnInit {
     }
   }
 
+  public onFileChange(event) {
+    this.showImage = false;
+    const [file] = event.target.files;
+    this.paintImage(file);
+  }
+
   private paintImage(blob) {
     const canvasElement = this.canvas.nativeElement;
     canvasElement.height = 190;
