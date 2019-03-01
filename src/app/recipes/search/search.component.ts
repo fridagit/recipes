@@ -8,7 +8,7 @@ import {SearchService} from '../../services/search.service';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent {
-  private search: string;
+  search: string;
 
   constructor(private searchService: SearchService) {
   }
