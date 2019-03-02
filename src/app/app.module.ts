@@ -32,9 +32,11 @@ import {CategoryEditComponent} from './recipes/category-edit/category-edit.compo
 import {SearchComponent} from './recipes/search/search.component';
 import {SearchService} from './services/search.service';
 import { WeekplanService } from './services/weekplan.service';
+import { WeekPlanningListComponent } from './recipes/week-planning-list/week-planning-list.component';
 
 const appRoutes: Routes = [
   {path: '', component: RecipesListComponent},
+  {path: 'planning', component: WeekPlanningListComponent},
   {path: 'new', component: RecipeEditComponent},
   {
     path: ':id', component: RecipeViewComponent, resolve: {
@@ -46,7 +48,9 @@ const appRoutes: Routes = [
       recipe: RecipeResolverService
     }
   },
+
   {path: '**', component: RecipesListComponent}
+
 ];
 
 @NgModule({
@@ -58,7 +62,8 @@ const appRoutes: Routes = [
     RecipeEditComponent,
     IngredientEditComponent,
     CategoryEditComponent,
-    SearchComponent
+    SearchComponent,
+    WeekPlanningListComponent
   ],
   imports: [
     FormsModule,
