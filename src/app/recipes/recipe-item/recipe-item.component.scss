@@ -4,6 +4,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .card-footer {
@@ -18,4 +19,5 @@
   height: 190px;
   background-position: center;
   background-size: cover;
+  cursor: pointer;
 }
