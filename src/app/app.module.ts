@@ -11,6 +11,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
+import {HotkeyModule} from 'angular2-hotkeys';
 
 import {RecipesService} from './services/recipes.service';
 import {RecipeResolverService} from './services/recipe-resolver.service';
@@ -75,6 +76,7 @@ const appRoutes: Routes = [
     ToastrModule.forRoot({
       preventDuplicates: true,
     }),
+    HotkeyModule.forRoot(),
   ],
   providers: [RecipesService, DataStorageService, AngularFirestore, SearchService],
   bootstrap: [AppComponent]

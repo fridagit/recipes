@@ -1,7 +1,9 @@
-import {AfterContentChecked, Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
+import {AfterContentChecked, Component, Inject, OnInit, PLATFORM_ID, ViewChild, ElementRef} from '@angular/core';
 import {NavigationEnd, NavigationStart, Router} from '@angular/router';
 import {isPlatformBrowser, LocationStrategy} from '@angular/common';
 import {Observable, Subject} from 'rxjs';
+import {HotkeysService, Hotkey} from 'angular2-hotkeys';
+import {SearchComponent} from './recipes/search/search.component';
 
 @Component({
   selector: 'app-root',
@@ -14,13 +16,20 @@ import {Observable, Subject} from 'rxjs';
  * https://github.com/angular/angular/issues/24547#
  */
 export class AppComponent implements OnInit, AfterContentChecked {
+  @ViewChild('searchDesktop')
+  public searchDesktop: SearchComponent;
   private _isPopState = false;
   private _routeScrollPositions: { [url: string]: number } = {};
   private _deferredRestore = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
               private router: Router,
-              private locStrat: LocationStrategy) {
+              private locStrat: LocationStrategy,
+              private _hotkeysService: HotkeysService) {
+    this._hotkeysService.add(new Hotkey('/', (event: KeyboardEvent): boolean => {
+      this.searchDesktop.focus();
+      return false; // Prevent bubbling
+    }));
   }
 
   ngOnInit(): void {
