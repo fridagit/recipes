@@ -1,5 +1,5 @@
 <div class="row col-12 align-items-center">
-  <input class="form-control ds-input col-1" [(ngModel)]="ingredient.number"/>
-  <input class="form-control ds-input col-9" [(ngModel)]="ingredient.name"/>
+  <input #number class="form-control ds-input col-3" [(ngModel)]="ingredient.number" (keydown)="onKeydown($event)"/>
+  <input class="form-control ds-input col-7" [(ngModel)]="ingredient.name" (keydown)="onKeydown($event)"/>
   <fa-icon class="col-2" icon="{{icon}}" (click)="clicked.emit(ingredient)"></fa-icon>
 </div>

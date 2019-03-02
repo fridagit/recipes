@@ -1,5 +1,5 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import { Category } from '../../models';
+import {Category} from '../../models';
 
 @Component({
   selector: 'app-category-edit',
@@ -13,4 +13,10 @@ export class CategoryEditComponent {
   icon: string;
   @Output()
   clicked = new EventEmitter<Category>();
+
+  onKeydown(event) {
+    if (event.key === 'Enter' && this.category) {
+      this.clicked.emit(this.category);
+    }
+  }
 }

@@ -20,7 +20,7 @@
           <span>Ingredienser</span>
         </div>
         <app-ingredient-edit *ngFor="let ingredient of recipe.ingredients" [ingredient]="ingredient" icon="trash-alt" (clicked)="removeIngredient($event)"></app-ingredient-edit>
-        <app-ingredient-edit [ingredient]="newIngredient" icon="plus-circle" (clicked)="addIngredient($event)"></app-ingredient-edit>
+        <app-ingredient-edit [ingredient]="newIngredient" icon="plus-circle" (clicked)="addIngredient($event)" (enter)="addIngredient($event)"></app-ingredient-edit>
       </div>
     </div>
     <div class="col-md-8">
