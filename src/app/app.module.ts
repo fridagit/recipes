@@ -31,6 +31,7 @@ import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
 import {CategoryEditComponent} from './recipes/category-edit/category-edit.component';
 import {SearchComponent} from './recipes/search/search.component';
 import {SearchService} from './services/search.service';
+import { WeekplanService } from './services/weekplan.service';
 
 const appRoutes: Routes = [
   {path: '', component: RecipesListComponent},
@@ -78,7 +79,7 @@ const appRoutes: Routes = [
     }),
     HotkeyModule.forRoot(),
   ],
-  providers: [RecipesService, DataStorageService, AngularFirestore, SearchService],
+  providers: [RecipesService, DataStorageService, AngularFirestore, SearchService, WeekplanService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

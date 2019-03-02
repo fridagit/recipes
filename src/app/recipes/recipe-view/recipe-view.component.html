@@ -30,4 +30,10 @@
       </span>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-12">
+      <fa-icon icon="calendar-plus" title="Lägg till i veckomeny" (click)="addToWeekMenu()" *ngIf="!recipeAddedToWeekplan" ></fa-icon>
+      <fa-icon icon="calendar-minus" title="Ta bort från veckomeny" (click)="removeRecipe()" *ngIf="recipeAddedToWeekplan" ></fa-icon>
+    </div>
+  </div>
 </div>

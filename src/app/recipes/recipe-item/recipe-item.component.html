@@ -1,12 +1,21 @@
-<div  [routerLink]="[index]" class="card m-2" style="width: 18rem;">
+<div class="card m-2" style="width: 18rem;">
+  <div [routerLink]="[index]">
   <div class="image rounded" [ngStyle]="{'backgroundImage':  'url(' + image + ')'}"></div>
   <div class="card-body">
     <a class="list-group-item-heading" title="{{recipe.name}}">{{recipe.name}}</a>
 
 
   </div>
-  <p class="card-footer text-right">
-    <span  *ngFor="let c of recipe.categories"> {{c.name}} | </span>
-  </p>
+</div>
+  <div class="card-footer">
+      <div class="text-left float-left">
+          <fa-icon icon="calendar-plus" title="Lägg till i veckomeny" (click)="addToWeekMenu()" *ngIf="!recipeAddedToWeekplan" ></fa-icon>
+          <fa-icon icon="calendar-minus" title="Ta bort från veckomeny" (click)="removeRecipe()" *ngIf="recipeAddedToWeekplan" ></fa-icon>
+      </div>
+      <div class="text-right float-right">
+        <span  *ngFor="let c of recipe.categories"> {{c.name}} | </span>
+      </div>
+  </div>
+
 </div>
 

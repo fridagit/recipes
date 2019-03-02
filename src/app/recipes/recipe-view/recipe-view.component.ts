@@ -1,6 +1,7 @@
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Recipe} from '../../models';
+import { WeekplanService } from '../../services/weekplan.service';
 
 @Component({
   selector: 'app-recipe-view',
@@ -9,8 +10,9 @@ import {Recipe} from '../../models';
 })
 export class RecipeViewComponent implements OnInit {
   recipe: Recipe;
+  recipeAddedToWeekplan: boolean;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router, private weekplanService: WeekplanService) {
   }
 
   hostname(url: string) {
@@ -28,5 +30,17 @@ export class RecipeViewComponent implements OnInit {
       this.recipe = data.recipe;
       this.recipe.image = this.recipe.image || '';
     });
+
+    this.recipeAddedToWeekplan = this.weekplanService.recipeFound(this.recipe.id);
+  }
+
+  addToWeekMenu() {
+    this.weekplanService.addRecipe(this.recipe.id);
+    this.recipeAddedToWeekplan = true;
+  }
+
+  removeRecipe() {
+    this.weekplanService.removeRecipe(this.recipe.id);
+    this.recipeAddedToWeekplan = false;
   }
 }
