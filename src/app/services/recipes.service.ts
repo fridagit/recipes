@@ -25,6 +25,10 @@ export class RecipesService {
     return this.db.getRecipe(id);
   }
 
+  getRecipeForWeekPlanning(id: string): Recipe {
+    return this.dataStore.recipes.find(x => x.id === id);
+  }
+
   createOrUpdateRecipe(recipe: Recipe) {
     this.db.createOrUpdateRecipe(recipe);
   }

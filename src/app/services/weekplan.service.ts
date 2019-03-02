@@ -33,6 +33,14 @@ export class WeekplanService {
      }
   }
 
+  getTempWeekPlanning() {
+    return this.tempWeekMenu;
+  }
+
+  getWeekPlanning() {
+    return this.weekMenus;
+  }
+
   addRecipeToWeekMenu(weekNumber: number, id: string) {
      const menu = this.weekMenus.find(x => x.weekNumber === weekNumber);
      if (menu === undefined) {

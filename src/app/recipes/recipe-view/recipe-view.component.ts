@@ -31,7 +31,7 @@ export class RecipeViewComponent implements OnInit {
       this.recipe.image = this.recipe.image || '';
     });
 
-    this.recipeAddedToWeekplan = this.weekplanService.recipeFound(this.recipe.id);
+    this.recipeAddedToWeekplan = this.weekplanService.recipeFoundInWeekplan(1, this.recipe.id);
   }
 
   addToWeekMenu() {
