@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, AfterContentChecked {
               private router: Router,
               private locStrat: LocationStrategy,
               private _hotkeysService: HotkeysService,
-              private authService: AuthService) {
+              authService: AuthService) {
     this._hotkeysService.add(new Hotkey('/', (event: KeyboardEvent): boolean => {
       this.searchDesktop.focus();
       return false; // Prevent bubbling
