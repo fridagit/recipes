@@ -33,10 +33,10 @@ import {CategoryEditComponent} from './components/category-edit/category-edit.co
 import {SearchComponent} from './components/search/search.component';
 import {SearchService} from './services/search.service';
 import {WeekplanService} from './services/weekplan.service';
-import {WeekPlanningListComponent} from './recipes/week-planning-list/week-planning-list.component';
 import {AuthService} from './services/auth.service';
 import {LoginComponent} from './components/login/login.component';
 import {AuthGuard} from './services/auth.guard';
+import {WeekPlanningListComponent} from './components/week-planning-list/week-planning-list.component';
 
 const appRoutes: Routes = [
   {
@@ -47,36 +47,39 @@ const appRoutes: Routes = [
     path: '',
     component: RecipesListComponent,
     canActivate: [AuthGuard],
-    children:
-      [
-        {
-          path: 'planning',
-          component: WeekPlanningListComponent
-        },
-        {
-          path: 'new',
-          component: RecipeEditComponent,
-        },
-        {
-          path: ':id',
-          component: RecipeViewComponent,
-          resolve: {
-            recipe: RecipeResolverService
-          },
-        },
-        {
-          path: ':id/edit',
-          component: RecipeEditComponent,
-          resolve: {
-            recipe: RecipeResolverService
-          },
-        },
-        {
-          path: '**',
-          component: RecipesListComponent,
-        }
-      ]
+  },
+  {
+    path: 'planning',
+    component: WeekPlanningListComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'new',
+    component: RecipeEditComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: ':id',
+    component: RecipeViewComponent,
+    resolve: {
+      recipe: RecipeResolverService
+    },
+    canActivate: [AuthGuard],
+  },
+  {
+    path: ':id/edit',
+    component: RecipeEditComponent,
+    resolve: {
+      recipe: RecipeResolverService
+    },
+    canActivate: [AuthGuard],
+  },
+  {
+    path: '**',
+    component: RecipesListComponent,
+    canActivate: [AuthGuard],
   }
+
 ];
 
 @NgModule({
