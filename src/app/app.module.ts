@@ -38,6 +38,8 @@ import {LoginComponent} from './components/login/login.component';
 import {AuthGuard} from './services/auth.guard';
 import {WeekPlanningListComponent} from './components/week-planning-list/week-planning-list.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { MatCardModule, MatIconModule, MatToolbarModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const appRoutes: Routes = [
   {
@@ -101,6 +103,12 @@ const appRoutes: Routes = [
     HttpModule,
     BrowserModule,
     HttpClientModule,
+    MatCardModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -115,7 +123,8 @@ const appRoutes: Routes = [
       preventDuplicates: true,
     }),
     HotkeyModule.forRoot(),
-    DragDropModule
+    DragDropModule,
+    FlexLayoutModule
   ],
   providers: [
     RecipesService,
