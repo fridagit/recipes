@@ -3,7 +3,8 @@ import {NavigationEnd, NavigationStart, Router} from '@angular/router';
 import {isPlatformBrowser, LocationStrategy} from '@angular/common';
 import {Observable, Subject} from 'rxjs';
 import {HotkeysService, Hotkey} from 'angular2-hotkeys';
-import {SearchComponent} from './recipes/search/search.component';
+import {SearchComponent} from './components/search/search.component';
+import {AuthService} from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,8 @@ export class AppComponent implements OnInit, AfterContentChecked {
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
               private router: Router,
               private locStrat: LocationStrategy,
-              private _hotkeysService: HotkeysService) {
+              private _hotkeysService: HotkeysService,
+              private authService: AuthService) {
     this._hotkeysService.add(new Hotkey('/', (event: KeyboardEvent): boolean => {
       this.searchDesktop.focus();
       return false; // Prevent bubbling
@@ -94,7 +96,6 @@ export class AppComponent implements OnInit, AfterContentChecked {
           // save scroll position of urls on router navigation
           // at NavigationStart, router.url is still the url of the current route (not the target of the navigation)
           this.saveScroll(this.router.url);
-          console.log(this.router.url);
         }
       }
 

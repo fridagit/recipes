@@ -6,6 +6,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireDatabaseModule, AngularFireDatabase} from 'angularfire2/database';
+import {AngularFireAuthModule} from 'angularfire2/auth';
 import {MarkdownModule} from 'ngx-markdown';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FormsModule} from '@angular/forms';
@@ -19,38 +20,63 @@ import {DataStorageService} from './services/data-storage.service';
 import {AngularFirestore} from '@angular/fire/firestore';
 
 import {AppComponent} from './app.component';
-import {RecipesListComponent} from './recipes/recipes-list/recipes-list.component';
-import {RecipeItemComponent} from './recipes/recipe-item/recipe-item.component';
-import {IngredientEditComponent} from './recipes/ingredient-edit/ingredient-edit.component';
+import {RecipesListComponent} from './components/recipes-list/recipes-list.component';
+import {RecipeItemComponent} from './components/recipe-item/recipe-item.component';
+import {IngredientEditComponent} from './components/ingredient-edit/ingredient-edit.component';
 
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {fas} from '@fortawesome/free-solid-svg-icons';
 import {far} from '@fortawesome/free-regular-svg-icons';
-import {RecipeViewComponent} from './recipes/recipe-view/recipe-view.component';
-import {RecipeEditComponent} from './recipes/recipe-edit/recipe-edit.component';
-import {CategoryEditComponent} from './recipes/category-edit/category-edit.component';
-import {SearchComponent} from './recipes/search/search.component';
+import {RecipeViewComponent} from './components/recipe-view/recipe-view.component';
+import {RecipeEditComponent} from './components/recipe-edit/recipe-edit.component';
+import {CategoryEditComponent} from './components/category-edit/category-edit.component';
+import {SearchComponent} from './components/search/search.component';
 import {SearchService} from './services/search.service';
-import { WeekplanService } from './services/weekplan.service';
-import { WeekPlanningListComponent } from './recipes/week-planning-list/week-planning-list.component';
+import {WeekplanService} from './services/weekplan.service';
+import {WeekPlanningListComponent} from './recipes/week-planning-list/week-planning-list.component';
+import {AuthService} from './services/auth.service';
+import {LoginComponent} from './components/login/login.component';
+import {AuthGuard} from './services/auth.guard';
 
 const appRoutes: Routes = [
-  {path: '', component: RecipesListComponent},
-  {path: 'planning', component: WeekPlanningListComponent},
-  {path: 'new', component: RecipeEditComponent},
   {
-    path: ':id', component: RecipeViewComponent, resolve: {
-      recipe: RecipeResolverService
-    }
+    path: 'login',
+    component: LoginComponent,
   },
   {
-    path: ':id/edit', component: RecipeEditComponent, resolve: {
-      recipe: RecipeResolverService
-    }
-  },
-
-  {path: '**', component: RecipesListComponent}
-
+    path: '',
+    component: RecipesListComponent,
+    canActivate: [AuthGuard],
+    children:
+      [
+        {
+          path: 'planning',
+          component: WeekPlanningListComponent
+        },
+        {
+          path: 'new',
+          component: RecipeEditComponent,
+        },
+        {
+          path: ':id',
+          component: RecipeViewComponent,
+          resolve: {
+            recipe: RecipeResolverService
+          },
+        },
+        {
+          path: ':id/edit',
+          component: RecipeEditComponent,
+          resolve: {
+            recipe: RecipeResolverService
+          },
+        },
+        {
+          path: '**',
+          component: RecipesListComponent,
+        }
+      ]
+  }
 ];
 
 @NgModule({
@@ -63,7 +89,8 @@ const appRoutes: Routes = [
     IngredientEditComponent,
     CategoryEditComponent,
     SearchComponent,
-    WeekPlanningListComponent
+    WeekPlanningListComponent,
+    LoginComponent,
   ],
   imports: [
     FormsModule,
@@ -72,6 +99,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     RouterModule.forRoot(appRoutes, {
       scrollPositionRestoration: 'enabled',
       useHash: true
@@ -84,8 +112,18 @@ const appRoutes: Routes = [
     }),
     HotkeyModule.forRoot(),
   ],
-  providers: [RecipesService, DataStorageService, AngularFirestore, SearchService, WeekplanService],
-  bootstrap: [AppComponent]
+  providers: [
+    RecipesService,
+    DataStorageService,
+    AngularFirestore,
+    SearchService,
+    WeekplanService,
+    AuthService,
+    AuthGuard,
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule {
   constructor() {

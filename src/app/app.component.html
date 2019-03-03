@@ -1,4 +1,4 @@
-<nav class="opaque navbar navbar-expand-lg navbar-light fixed-top">
+<nav *ngIf="authService.user | async" class="opaque navbar navbar-expand-lg navbar-light fixed-top">
   <a routerLink="/"><img class="logo" src="../assets/images/logo.png"/></a>
   <app-search class="col-6 d-lg-none"></app-search>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
@@ -15,9 +15,9 @@
         <a class="nav-link disabled" routerLink="/planning">Veckoplanering</a>
       </li>
     </ul>
-    <app-search #searchDesktop class="col-3 d-lg-inline"></app-search>
+    <app-search #searchDesktop class="col-3 d-none d-lg-inline"></app-search>
     <form class="form-inline my-2 my-lg-0">
-      <a class="btn btn-outline-success my-2 my-sm-0">Logga in</a>
+      <button (click)="authService.logout()" class="btn btn-outline-danger">Logga ut {{ (authService.user | async)?.displayName }}</button>
     </form>
   </div>
 </nav>
