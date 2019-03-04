@@ -1,4 +1,4 @@
-<nav *ngIf="authService.user | async" class="opaque navbar navbar-expand-lg navbar-light fixed-top">
+<!-- <nav *ngIf="authService.user | async" class="opaque navbar navbar-expand-lg navbar-light fixed-top">
   <a routerLink="/"><img class="logo" src="../assets/images/logo.png"/></a>
   <app-search class="col-6 d-lg-none"></app-search>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
@@ -20,7 +20,22 @@
       <button (click)="authService.logout()" class="btn btn-outline-danger">Logga ut {{ (authService.user | async)?.displayName }}</button>
     </form>
   </div>
-</nav>
+</nav> -->
+<mat-toolbar *ngIf="authService.user | async" class="opaqueNavbar fixed-top">
+  <span><a routerLink="/"><img class="logo" src="../assets/images/logo.png"/></a></span>
+  <span><a class="nav-link disabled" routerLink="/new">Lägg till recept</a></span>
+  <span><a class="nav-link disabled" routerLink="/planning">Veckoplanering</a></span>
+  <span class="fill-remaining-space"></span>
+  <span>
+      <app-search #searchDesktop class="col-3 d-none d-lg-inline"></app-search>
+  </span>
+  <span></span>
+  <span>
+      <form class="form-inline my-2 my-lg-0">
+          <button mat-stroked-button color="warn" (click)="authService.logout()">Logga ut {{ (authService.user | async)?.displayName }}</button>
+      </form>
+  </span>
+</mat-toolbar>
 <div class="container-fluid">
   <router-outlet></router-outlet>
 </div>

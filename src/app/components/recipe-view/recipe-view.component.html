@@ -1,4 +1,4 @@
-<div class="opaque container">
+<!-- <div class="opaque container">
   <div class="row">
     <div class="col-md-4">
       <img [src]="recipe.image" class="img-fluid rounded mt-3"/>
@@ -36,4 +36,44 @@
       <fa-icon icon="calendar-minus" title="Ta bort från veckomeny" (click)="removeRecipe()" *ngIf="recipeAddedToWeekplan" ></fa-icon>
     </div>
   </div>
+</div> -->
+
+<div class="opaque container">
+    <div flex fxLayout="row">
+      <div fxFlex="25">
+          <img [src]="recipe.image" class="img-fluid rounded mt-3"/>
+          <div>
+            <h4>{{recipe.name}}</h4>
+            <a [href]="recipe.url" *ngIf="recipe.url" target="_blank">{{hostname(recipe.url)}}</a>
+            <div class="justify-content-center" *ngIf="recipe.ingredients">
+              <span class="header">Det här behöver du:</span>
+            </div>
+            <div *ngFor="let ingredient of recipe.ingredients">
+              {{ingredient.number}} {{ingredient.name}}
+            </div>
+          </div>
+      </div>
+      <div fxFlex="75">
+          <span class="header">Så här gör du</span>
+          <div>
+            <markdown ngPreserveWhitespaces class="col-12" title="edit-description" [data]="recipe.description || '<i>Ingen beskrivning inlagd än!</i> 😱'"></markdown>
+          </div>
+      </div>
+    </div>
+    <div flex fxLayout="row">
+      <div fxFlex="25">
+      </div>
+      <div fxFlex="70" class="categories">
+          <span *ngFor="let c of recipe.categories">
+              {{c.name}} |
+            </span>
+      </div>
+      <div fxFlex="5">
+          <fa-icon class="edit-button" icon="pen" (click)="toggleEditMode()"></fa-icon>
+      </div>
+    </div>
+    <div flex fxLayout="row">
+        <fa-icon icon="calendar-plus" title="Lägg till i veckomeny" (click)="addToWeekMenu()" *ngIf="!recipeAddedToWeekplan" ></fa-icon>
+        <fa-icon icon="calendar-minus" title="Ta bort från veckomeny" (click)="removeRecipe()" *ngIf="recipeAddedToWeekplan" ></fa-icon>
+    </div>
 </div>

@@ -2,10 +2,42 @@
   max-width: 50px;
 }
 
+.container-fluid {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .navbar, .nav-link, .navbar-brand {
   color: #000 !important;
 }
 
 .btn {
   background: white;
+}
+
+.mat-toolbar {
+  span {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+  a {
+    text-decoration: none;
+  }
+}
+
+.fixed-top {
+  position:fixed;
+  top:0;
+  right:0;
+  left:0;
+  z-index:1030;
+}
+
+.fill-remaining-space {
+  /* This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
 }

@@ -1,13 +1,7 @@
-<div class="container centercard">
-  <div class="row justify-content-md-center align-items-center centercard">
-    <div>
-      <div class="card-body col align-items-center">
-        <img class="logo row justify-content-center" src="../../../assets/images/logo.png"/>
-        <div class="row justify-content-center">
-          <button (click)="authService.login()" class="btn btn-success m-3">Logga in</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="10px 10px" fxLayoutAlign="center">
+    <img class="image" src="../../../assets/images/logo.png" (load)="logoLoaded()" />
+</div>
+<div fxLayout="row" fxLayoutAlign="center">
+    <button *ngIf="loaded" mat-raised-button color="primary" (click)="authService.login()">Logga in</button>
 </div>
 

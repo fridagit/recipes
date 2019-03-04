@@ -8,3 +8,16 @@
   height: 100%;
   margin-top: 70px;
 }
+
+.image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+}
+
+.imageSmall image {
+  width: 100%;
+  max-width: 100px;
+  height: auto;
+}
+

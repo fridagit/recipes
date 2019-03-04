@@ -6,8 +6,12 @@ import {AuthService} from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent{
+  loaded;
 
   constructor(public authService: AuthService) { }
 
+  logoLoaded() {
+    this.loaded = true;
+  }
 }
