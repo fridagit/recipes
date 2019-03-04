@@ -1,17 +1,28 @@
 @import "~styles/variables";
 
+.container-card {
+  width: 286px;
+  padding: 0;
+  margin: .5rem;
+  margin-bottom: 20px;
+}
+
 .card-body {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   cursor: pointer;
+  padding: 1.25rem;
 }
 
 .card-footer {
   margin-right: 0;
   margin-bottom: 0;
   font-size: 12px;
-  height: 43px;
+  height: 15px;
+  padding:.75rem 1.25rem;
+  background-color:rgba(0,0,0,.03);
+  border-top:1px solid rgba(0,0,0,.125);
 }
 
 .image {
@@ -20,4 +31,21 @@
   background-position: center;
   background-size: cover;
   cursor: pointer;
+  margin: 0;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.float-left {
+  float: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.float-right {
+  float: right;
 }
