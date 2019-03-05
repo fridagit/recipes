@@ -2,7 +2,7 @@
   <div flex fxLayout="row">
     <div fxFlex="25">
       <img [src]="recipe.image" *ngIf="showImage" class="img-fluid rounded col align-self-center mt-3"/>
-      <div class="column-ingredient">
+      <div>
         <input #fileInput type="file" (change)="onFileChange($event)" accept="image/*" style="display: none">
         <canvas #canvas width="286" height="0"></canvas>
         <div>
@@ -12,23 +12,22 @@
             OOGLA BILD!
           </a>
         </div>
-        <div class="pt-3 col-12 row">
+        <div>
           <span>Namn</span>
           <input class="form-control ds-input col-12" [(ngModel)]="recipe.name"/>
           <span>Länk</span>
           <input class="form-control ds-input col-12" [(ngModel)]="recipe.url"/>
           <span>Ingredienser</span>
         </div>
-        <app-ingredient-edit *ngFor="let ingredient of recipe.ingredients" [ingredient]="ingredient" icon="trash-alt" (clicked)="removeIngredient($event)"></app-ingredient-edit>
-        <app-ingredient-edit [ingredient]="newIngredient" icon="plus-circle" (clicked)="addIngredient($event)" (enter)="addIngredient($event)"></app-ingredient-edit>
+          <app-ingredient-edit *ngFor="let ingredient of recipe.ingredients" [ingredient]="ingredient" icon="trash-alt" (clicked)="removeIngredient($event)"></app-ingredient-edit>
+          <app-ingredient-edit [ingredient]="newIngredient" icon="plus-circle" (clicked)="addIngredient($event)" (enter)="addIngredient($event)"></app-ingredient-edit>
       </div>
     </div>
     <div fxFlex="75">
       <div class="edit-description container h-100 pt-md-3">
         <div class="row">
           Beskrivning
-          <textarea class="col-12 rounded form-control ds-input" title="edit-description"
-                    [(ngModel)]="recipe.description"></textarea>
+          <textarea class="rounded form-control ds-input" title="edit-description" [(ngModel)]="recipe.description"></textarea>
         </div>
         <div class="col-12 mt-3 mb-3">
           <span>Kategorier</span>

@@ -1,5 +1,10 @@
-<div class="row col-12 align-items-center">
+<!-- <div class="row col-12 align-items-center">
   <input #number class="form-control ds-input col-3" [(ngModel)]="ingredient.number" (keydown)="onKeydown($event)"/>
   <input class="form-control ds-input col-7" [(ngModel)]="ingredient.name" (keydown)="onKeydown($event)"/>
   <fa-icon class="col-2" icon="{{icon}}" (click)="clicked.emit(ingredient)"></fa-icon>
+</div> -->
+<div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center center">
+  <input fxFlex="20"  #number class="form-control" [(ngModel)]="ingredient.number" (keydown)="onKeydown($event)"/>
+  <input class="form-control" [(ngModel)]="ingredient.name" (keydown)="onKeydown($event)"/>
+  <fa-icon fxFlex="3" icon="{{icon}}" (click)="clicked.emit(ingredient)"></fa-icon>
 </div>
