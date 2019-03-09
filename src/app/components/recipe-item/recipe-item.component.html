@@ -1,6 +1,6 @@
 <mat-card class="card container-card">
     <div [routerLink]="[index]">
-        <img mat-card-image [src]="image" class="image rounded" />
+        <div class="image rounded" [ngStyle]="{'backgroundImage':  'url(' + image + ')'}"></div>
         <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
             <a class="card-body" title="{{recipe.name}}">{{recipe.name}}</a>
         </mat-card-title>
