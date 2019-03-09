@@ -4,6 +4,7 @@ import { WeekMenu } from './../../models/weekMenu.model';
 import { WeekplanService } from '../../services/weekplan.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-week-planning-list',
@@ -29,5 +30,9 @@ export class WeekPlanningListComponent implements OnInit {
         this.recipes.push(r);
       }
     }
+  }
+
+  drop(event: CdkDragDrop<Recipe[]>) {
+    moveItemInArray(this.recipes, event.previousIndex, event.currentIndex);
   }
 }
