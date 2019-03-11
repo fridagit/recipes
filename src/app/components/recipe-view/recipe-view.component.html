@@ -40,7 +40,7 @@
 
 <div class="opaque container">
     <div flex fxLayout="row" fxLayoutGap="10px">
-      <div fxFlex="25">
+      <div fxFlex="25" fxFlex.xs="100%">
           <img [src]="recipe.image" class="img-fluid rounded mt-3"/>
           <div>
             <h4>{{recipe.name}}</h4>
@@ -52,8 +52,14 @@
               {{ingredient.number}} {{ingredient.name}}
             </div>
           </div>
+          <div class="mt-1" fxShow fxHide.xs="false" fxHide.gt-xs="true">
+              <span class="header">Så här gör du:</span>
+              <div>
+                <markdown ngPreserveWhitespaces class="col-12" title="edit-description" [data]="recipe.description || '<i>Ingen beskrivning inlagd än!</i> 😱'"></markdown>
+              </div>
+          </div>
       </div>
-      <div fxFlex="75">
+      <div fxFlex="75" fxShow fxHide.xs="true" fxHide.gt-xs="false">
           <span class="header">Så här gör du:</span>
           <div>
             <markdown ngPreserveWhitespaces class="col-12" title="edit-description" [data]="recipe.description || '<i>Ingen beskrivning inlagd än!</i> 😱'"></markdown>
@@ -64,8 +70,8 @@
       <div fxFlex="25">
       </div>
       <div fxFlex="70" class="categories">
-          <span *ngFor="let c of recipe.categories">
-              {{c.name}} |
+          <span *ngFor="let c of recipe.categories; let isLast=last">
+              {{c.name}}{{isLast ? '' : ' |'}}
             </span>
       </div>
       <div fxFlex="5">
