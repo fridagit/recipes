@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="left center">
-  <input class="form-control ds-input col-md-6 col-10" [(ngModel)]="category.name" (keydown)="onKeydown($event)"/>
+<div class="mb-1" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="left center">
+  <input class="form-control" [(ngModel)]="category.name" (keydown)="onKeydown($event)"/>
   <fa-icon class="col" icon="{{icon}}" (click)="clicked.emit(category)"></fa-icon>
 </div>

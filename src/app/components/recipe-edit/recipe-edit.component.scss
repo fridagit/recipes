@@ -8,11 +8,18 @@
 }
 
 .edit-description {
-}
+  input.form-control {
+    width: 87%;
+  }
 
-.edit-description textarea {
-  height: 500px;
-  width: 100%;
+  textarea {
+    height: 500px;
+    width: 100%;
+  }
+
+  .buttons {
+    float: right;
+  }
 }
 
 .edit-ingredients {
@@ -21,4 +28,8 @@
 
 .google-logo {
   font-size: large;
+  text-decoration: none;
+  img {
+    vertical-align: middle;
+  }
 }

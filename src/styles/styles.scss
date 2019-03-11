@@ -69,3 +69,31 @@ a, a:visited, a:hover, a:active {
   border-radius:.25rem;
   transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+
+.p-1 {
+  padding: 10px !important;
+}
+
+.pt-1 {
+  padding-top: 10px !important;
+}
+
+.m-1 {
+  margin: 10px !important;
+}
+
+.mb-1 {
+  margin-bottom: 10px !important;
+}
+
+.mt-1 {
+  margin-top: 10px !important;
+}
+
+.mr-1 {
+  margin-right: 10px !important;
+}
+
+.ml-1 {
+  margin-left: 10px !important;
+}
