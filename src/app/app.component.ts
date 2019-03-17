@@ -1,10 +1,11 @@
-import {AfterContentChecked, Component, Inject, OnInit, PLATFORM_ID, ViewChild, ElementRef} from '@angular/core';
+import {AfterContentChecked, Component, Inject, OnInit, PLATFORM_ID, ViewChild, ElementRef, ChangeDetectorRef} from '@angular/core';
 import {NavigationEnd, NavigationStart, Router} from '@angular/router';
 import {isPlatformBrowser, LocationStrategy} from '@angular/common';
 import {Observable, Subject} from 'rxjs';
 import {HotkeysService, Hotkey} from 'angular2-hotkeys';
 import {SearchComponent} from './components/search/search.component';
 import {AuthService} from './services/auth.service';
+import {MediaMatcher} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-root',
@@ -22,12 +23,18 @@ export class AppComponent implements OnInit, AfterContentChecked {
   private _isPopState = false;
   private _routeScrollPositions: { [url: string]: number } = {};
   private _deferredRestore = false;
+  private mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
               private router: Router,
               private locStrat: LocationStrategy,
               private _hotkeysService: HotkeysService,
-              public authService: AuthService) {
+              public authService: AuthService,
+              changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+    this.mobileQuery = media.matchMedia('(max-width: 999px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
     this._hotkeysService.add(new Hotkey('/', (event: KeyboardEvent): boolean => {
       this.searchDesktop.focus();
       return false; // Prevent bubbling
@@ -38,6 +45,14 @@ export class AppComponent implements OnInit, AfterContentChecked {
     if (isPlatformBrowser(this.platformId)) {
       this.addScrollTopListeners();
     }
+  }
+
+  isMobile(): boolean {
+    return this.mobileQuery.matches;
+  }
+
+  isDesktop(): boolean {
+    return !this.isMobile();
   }
 
   /**

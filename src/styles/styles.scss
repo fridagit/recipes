@@ -11,7 +11,8 @@ body {
   background-size: cover;
   background-image: url("../assets/images/food.jpg");
   background-attachment: fixed;
-  padding-top: 70px;
+  padding-top: 54px;
+  margin: 0;
 }
 
 .container {
@@ -24,10 +25,6 @@ body {
 
 a, a:visited, a:hover, a:active {
   color: black;
-}
-
-.opaqueNavbar {
-  background-color: $navbar-background;
 }
 
 .opaque {

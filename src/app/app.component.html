@@ -1,42 +1,37 @@
-<!-- <nav *ngIf="authService.user | async" class="opaque navbar navbar-expand-lg navbar-light fixed-top">
-  <a routerLink="/"><img class="logo" src="../assets/images/logo.png"/></a>
-  <app-search class="col-6 d-lg-none"></app-search>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<div *ngIf="isDesktop()">
+  <mat-toolbar *ngIf="authService.user | async" class="opaqueNavbar" fxLayout="row" fxLayoutAlign="space-between center">
+    <a routerLink="/"><img class="logo" src="../assets/images/logo.png"/></a>
+    <a class="nav-link disabled" routerLink="/new">Lägg till recept</a>
+    <a class="nav-link disabled" routerLink="/planning">Veckoplanering</a>
+    <app-search fxFlex="stretch" #searchDesktop class="col-3 d-none d-lg-inline"></app-search>
+    <span><button mat-stroked-button color="warn" (click)="authService.logout()">Logga ut {{ (authService.user | async)?.displayName }}</button></span>
+  </mat-toolbar>
 
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item">
-        <a class="nav-link disabled" routerLink="/new">Lägg till recept</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" routerLink="/planning">Veckoplanering</a>
-      </li>
-    </ul>
-    <app-search #searchDesktop class="col-3 d-none d-lg-inline"></app-search>
-    <form class="form-inline my-2 my-lg-0">
-      <button (click)="authService.logout()" class="btn btn-outline-danger">Logga ut {{ (authService.user | async)?.displayName }}</button>
-    </form>
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
   </div>
-</nav> -->
-<mat-toolbar *ngIf="authService.user | async" class="opaqueNavbar fixed-top">
-  <span><a routerLink="/"><img class="logo" src="../assets/images/logo.png"/></a></span>
-  <span><a class="nav-link disabled" routerLink="/new">Lägg till recept</a></span>
-  <span><a class="nav-link disabled" routerLink="/planning">Veckoplanering</a></span>
-  <span class="fill-remaining-space"></span>
-  <span>
-      <app-search #searchDesktop class="col-3 d-none d-lg-inline"></app-search>
-  </span>
-  <span></span>
-  <span>
-      <form class="form-inline my-2 my-lg-0">
-          <button mat-stroked-button color="warn" (click)="authService.logout()">Logga ut {{ (authService.user | async)?.displayName }}</button>
-      </form>
-  </span>
-</mat-toolbar>
-<div class="container-fluid">
-  <router-outlet></router-outlet>
 </div>
 
+<div *ngIf="isMobile()" class="sidenav">
+  <mat-toolbar *ngIf="authService.user | async" class="opaqueNavbar" fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <app-search fxFlex="70"></app-search>
+    <a routerLink="/" fxLayoutAlign="center center" (click)="snav.close()"><img class="logo" src="../assets/images/logo-small.png"/></a>
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav #snav [fixedInViewport]="true" fixedTopGap="62">
+      <mat-nav-list (click)="snav.close()">
+        <a mat-list-item routerLink="/new">Lägg till recept</a>
+        <a mat-list-item routerLink="/planning">Veckoplanering</a>
+        <a mat-list-item (click)="authService.logout()">Logga ut {{ (authService.user | async)?.displayName }}</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

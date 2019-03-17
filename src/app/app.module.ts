@@ -38,7 +38,10 @@ import {LoginComponent} from './components/login/login.component';
 import {AuthGuard} from './services/auth.guard';
 import {WeekPlanningListComponent} from './components/week-planning-list/week-planning-list.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import {MatCardModule, MatIconModule, MatToolbarModule, MatButtonModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {
+  MatCardModule, MatIconModule, MatToolbarModule, MatButtonModule,
+  MatFormFieldModule, MatInputModule, MatSidenavModule, MatListModule
+} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 const appRoutes: Routes = [
@@ -109,6 +112,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSidenavModule,
+    MatListModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,

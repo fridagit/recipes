@@ -1,17 +1,14 @@
+@import "~styles/variables";
+
 .logo {
   max-width: 50px;
 }
 
 .container-fluid {
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
+  width: 95%;
+  padding-top: 20px;
   margin-right: auto;
   margin-left: auto;
-}
-
-.navbar, .nav-link, .navbar-brand {
-  color: #000 !important;
 }
 
 .btn {
@@ -19,25 +16,47 @@
 }
 
 .mat-toolbar {
-  span {
+  * {
     padding-right: 0.5rem;
     padding-left: 0.5rem;
   }
+
   a {
     text-decoration: none;
   }
 }
 
-.fixed-top {
-  position:fixed;
-  top:0;
-  right:0;
-  left:0;
-  z-index:1030;
+.opaqueNavbar {
+  background-color: $navbar-background;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
 }
 
-.fill-remaining-space {
-  /* This fills the remaining space, by using flexbox.
-     Every toolbar row uses a flexbox row layout. */
-  flex: 1 1 auto;
+.mat-drawer-container {
+  margin-top: 64px;
+}
+
+.sidenav {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  .opaqueNavbar {
+    display: flex;
+    flex-direction: column;
+    bottom: 0;
+    padding: 2rem .5rem;
+  }
+}
+
+.mat-sidenav-container {
+  background-color: #00000000;
+  flex: 1;
 }
