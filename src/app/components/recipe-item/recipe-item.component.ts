@@ -1,5 +1,5 @@
-import { WeekplanService } from '../../services/weekplan.service';
-import {Component, OnInit, Input} from '@angular/core';
+import {WeekplanService} from '../../services/weekplan.service';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Recipe} from '../../models';
 
 @Component({
@@ -10,8 +10,9 @@ import {Recipe} from '../../models';
 export class RecipeItemComponent implements OnInit {
   @Input() recipe: Recipe;
   image: string;
-  @Input() index: string;
   recipeAddedToWeekplan: boolean;
+  @Output()
+  categoryClicked = new EventEmitter<string>();
 
   constructor(private weekplanService: WeekplanService) {
   }
@@ -31,4 +32,7 @@ export class RecipeItemComponent implements OnInit {
     this.recipeAddedToWeekplan = false;
   }
 
+  categoryNames(recipe: Recipe) {
+    return recipe.categories ? recipe.categories.map(category => category.name) : [];
+  }
 }

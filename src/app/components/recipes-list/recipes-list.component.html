@@ -1,7 +1,11 @@
+<div *ngIf="selectedCategories.length" class="selectedCategories">
+  Valda kategorier:
+  <app-categories [categories]="selectedCategories" (categoryClicked)="deselectCategory($event)"></app-categories>
+</div>
 <div class="row">
-    <div class="col-xs-12">
-        <div class="d-flex flex-wrap justify-content-center">
-            <app-recipe-item *ngFor="let r of recipes | async; let i = index" [recipe]="r" [index]="r.id"></app-recipe-item>
-        </div>
+  <div class="col-xs-12">
+    <div class="d-flex flex-wrap justify-content-center">
+      <app-recipe-item *ngFor="let r of recipes" [recipe]="r" (categoryClicked)="selectCategory($event)"></app-recipe-item>
     </div>
+  </div>
 </div>

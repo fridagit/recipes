@@ -37,6 +37,7 @@ import {AuthService} from './services/auth.service';
 import {LoginComponent} from './components/login/login.component';
 import {AuthGuard} from './services/auth.guard';
 import {WeekPlanningListComponent} from './components/week-planning-list/week-planning-list.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 
 const appRoutes: Routes = [
   {
@@ -94,6 +95,7 @@ const appRoutes: Routes = [
     SearchComponent,
     WeekPlanningListComponent,
     LoginComponent,
+    CategoriesComponent,
   ],
   imports: [
     FormsModule,

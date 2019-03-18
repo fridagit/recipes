@@ -1,0 +1,4 @@
+<ng-container *ngFor="let category of categories; last as isLast">
+  <span (click)="categoryClicked.emit(category)"> {{category}}</span>
+  <span *ngIf="!isLast"> | </span>
+</ng-container>

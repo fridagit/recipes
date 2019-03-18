@@ -13,7 +13,7 @@
           <fa-icon icon="calendar-minus" title="Ta bort från veckomeny" (click)="removeRecipe()" *ngIf="recipeAddedToWeekplan" ></fa-icon>
       </div>
       <div class="text-right float-right">
-        <span  *ngFor="let c of recipe.categories"> {{c.name}} | </span>
+        <app-categories [categories]="categoryNames(recipe)" (categoryClicked)="categoryClicked.emit($event)"></app-categories>
       </div>
   </div>
 
