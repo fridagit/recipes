@@ -2,7 +2,6 @@ import {environment} from '../environments/environment';
 import {HttpModule} from '@angular/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireDatabaseModule, AngularFireDatabase} from 'angularfire2/database';
@@ -43,50 +42,7 @@ import {
   MatFormFieldModule, MatInputModule, MatSidenavModule, MatListModule
 } from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
-
-const appRoutes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: '',
-    component: RecipesListComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'planning',
-    component: WeekPlanningListComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'new',
-    component: RecipeEditComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: ':id',
-    component: RecipeViewComponent,
-    resolve: {
-      recipe: RecipeResolverService
-    },
-    canActivate: [AuthGuard],
-  },
-  {
-    path: ':id/edit',
-    component: RecipeEditComponent,
-    resolve: {
-      recipe: RecipeResolverService
-    },
-    canActivate: [AuthGuard],
-  },
-  {
-    path: '**',
-    component: RecipesListComponent,
-    canActivate: [AuthGuard],
-  }
-
-];
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -117,10 +73,6 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    RouterModule.forRoot(appRoutes, {
-      scrollPositionRestoration: 'enabled',
-      useHash: true
-    }),
     MarkdownModule.forRoot(),
     FontAwesomeModule,
     BrowserAnimationsModule,
@@ -129,7 +81,8 @@ const appRoutes: Routes = [
     }),
     HotkeyModule.forRoot(),
     DragDropModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    AppRoutingModule
   ],
   providers: [
     RecipesService,

@@ -24,7 +24,7 @@ export class DataStorageService {
     const doc = this.fireStore.collection<Recipe>('recipes').doc(id);
     return doc.snapshotChanges().pipe(
       map(data => this.payloadAsRecipe(data.payload))
-      //map((data: { [id: string]: Recipe })  => {this.payloadAsRecipe(data.payload)})
+      // map((data: { [id: string]: Recipe })  => {this.payloadAsRecipe(data.payload)})
     );
   }
 
