@@ -10,8 +10,8 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./recipe-edit.component.scss']
 })
 export class RecipeEditComponent implements OnInit {
-  @ViewChild('canvas') public canvas: ElementRef;
-  @ViewChild('container') public container: ElementRef;
+  @ViewChild('canvas', {static: false }) public canvas: ElementRef;
+  @ViewChild('container', {static: false }) public container: ElementRef;
   recipe: Recipe;
   showImage = true;
   newIngredient: Ingredient = new Ingredient('', '');

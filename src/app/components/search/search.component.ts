@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent {
-  @ViewChild('searchElement') public searchElement: ElementRef;
+  @ViewChild('searchElement' , {static: false }) public searchElement: ElementRef;
   search: string;
 
   constructor(private searchService: SearchService, private router: Router) {

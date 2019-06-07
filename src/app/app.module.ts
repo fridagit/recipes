@@ -1,11 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {HttpModule} from '@angular/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
-import {AngularFireModule} from 'angularfire2';
-import {AngularFireDatabaseModule, AngularFireDatabase} from 'angularfire2/database';
-import {AngularFireAuthModule} from 'angularfire2/auth';
 import {MarkdownModule} from 'ngx-markdown';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FormsModule} from '@angular/forms';
@@ -43,6 +40,9 @@ import {
 } from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 @NgModule({
   declarations: [

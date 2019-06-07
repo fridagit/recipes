@@ -18,7 +18,7 @@ import {MediaMatcher} from '@angular/cdk/layout';
  * https://github.com/angular/angular/issues/24547#
  */
 export class AppComponent implements OnInit, AfterContentChecked {
-  @ViewChild('searchDesktop')
+  @ViewChild('searchDesktop', {static: false })
   public searchDesktop: SearchComponent;
   private _isPopState = false;
   private _routeScrollPositions: { [url: string]: number } = {};

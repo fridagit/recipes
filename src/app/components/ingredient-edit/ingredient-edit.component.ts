@@ -7,7 +7,7 @@ import {Ingredient} from '../../models';
   styleUrls: ['./ingredient-edit.component.scss']
 })
 export class IngredientEditComponent {
-  @ViewChild('number') public number: ElementRef;
+  @ViewChild('number' , {static: false }) public number: ElementRef;
 
   @Input()
   ingredient: Ingredient;
